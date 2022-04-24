@@ -13,11 +13,11 @@ let package = Package(
             targets: ["AuthorizedZone"]),
     ],
     dependencies: [
-        .package(name: "Module", path: "/Users/armancarhcan/Desktop/Module"),
-        .package(name: "DesignSystem", path: "/Users/armancarhcan/Desktop/DesignSystem"),
-        .package(name: "Settings", path: "/Users/armancarhcan/Desktop/Settings"),
-        .package(name: "Managers", path: "/Users/armancarhcan/Desktop/Managers"),
-        .package(url: "https://github.com/Swinject/Swinject.git", from: "2.8.0")
+        .package(url: "https://github.com/Swinject/Swinject.git", from: "2.8.0"),
+        .package(url: "https://github.com/arman095095/Managers.git", branch: "develop"),
+        .package(url: "https://github.com/arman095095/Module.git", branch: "develop"),
+        .package(url: "https://github.com/arman095095/DesignSystem.git", branch: "develop"),
+        .package(url: "https://github.com/arman095095/Settings.git", branch: "develop"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
