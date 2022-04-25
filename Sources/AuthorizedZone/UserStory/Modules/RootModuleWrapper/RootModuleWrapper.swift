@@ -10,6 +10,7 @@ import UIKit
 import Module
 import Managers
 import Profile
+import Settings
 
 public protocol AuthorizedZoneModuleInput: AnyObject {
     
@@ -17,7 +18,6 @@ public protocol AuthorizedZoneModuleInput: AnyObject {
 
 public protocol AuthorizedZoneModuleOutput: AnyObject {
     func openAuthorization()
-    func openAccountsSettings()
 }
 
 final class RootModuleWrapper {
@@ -53,5 +53,19 @@ extension RootModuleWrapper: MainTabbarModuleOutput {
     func logout() {
         authManager.signOut()
         output?.openAuthorization()
+    }
+}
+
+extension RootModuleWrapper: SettingsModuleOutput {
+    func openUnauthorizedZone() {
+        output?.openAuthorization()
+    }
+    
+    func openEditAccount() {
+        output?
+    }
+    
+    func openProfileModule(profile: ProfileModelProtocol) {
+        <#code#>
     }
 }

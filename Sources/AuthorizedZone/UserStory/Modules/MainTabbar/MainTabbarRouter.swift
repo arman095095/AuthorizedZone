@@ -9,9 +9,13 @@
 import UIKit
 import Module
 import Profile
+import Settings
+
+typealias SubmodulesOutput = ProfileModuleOutput
 
 protocol MainTabbarRouterInput: AnyObject {
-    func setupSubmodules()
+    func setupSubmodules(output: SubmodulesOutput)
+    func openAccountSettingsModule()
 }
 
 final class MainTabbarRouter {
@@ -24,19 +28,24 @@ final class MainTabbarRouter {
 }
 
 extension MainTabbarRouter: MainTabbarRouterInput {
-    func setupSubmodules() {
+    func setupSubmodules(output: SubmodulesOutput) {
         transitionHandler?.viewControllers = ModuleType.allCases.map {
-            let viewController = viewController(type: $0)
+            let viewController = viewController(output: output, type: $0)
             viewController.tabBarItem.image = UIImage(systemName: $0.imageName)
             viewController.tabBarItem.title = $0.title
             return viewController
         }
     }
+    
+    func openAccountSettingsModule() {
+        let module = routeMap.openAccountSettings()
+        transitionHandler?.navigationController?.pushViewController(module.view, animated: true)
+    }
 }
 
 private extension MainTabbarRouter {
     
-    func viewController(type: ModuleType) -> UIViewController {
+    func viewController(output: SubmodulesOutput, type: ModuleType) -> UIViewController {
         switch type {
         case .peoples:
             return UIViewController()
@@ -45,12 +54,14 @@ private extension MainTabbarRouter {
         case .chats:
             return UIViewController()
         case .profile:
-            return accountModule().view
+            return accountModule(output: output).view
         }
     }
     
-    func accountModule() -> ModuleProtocol {
-        routeMap.openCurrentAccountProfile()
+    func accountModule(output: ProfileModuleOutput) -> ModuleProtocol {
+        let module = routeMap.openCurrentAccountProfile()
+        module.output = output
+        return module
     }
     
     enum ModuleType: String, CaseIterable {

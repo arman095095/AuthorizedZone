@@ -10,6 +10,7 @@ import Module
 import Swinject
 import Managers
 import Profile
+import Settings
 
 public protocol AuthorizedZoneModuleProtocol: AnyObject {
     func rootModule() -> ModuleProtocol
@@ -38,6 +39,13 @@ extension AuthorizedZoneUserStory: AuthorizedZoneModuleProtocol {
 }
 
 extension AuthorizedZoneUserStory: RouteMapPrivate {
+
+    func openAccountSettings() -> ModuleProtocol {
+        let module = SettingsUserStory(container: container).rootModule()
+        module.output = outputWrapper
+        return module
+    }
+    
     func mainTabbarModule() -> MainTabbarModule {
         let module = MainTabbarAssembly.makeModule(routeMap: self)
         module._output = outputWrapper

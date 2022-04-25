@@ -37,7 +37,13 @@ final class MainTabbarPresenter {
 extension MainTabbarPresenter: MainTabbarViewOutput {
     func viewWillAppear() {
         view?.setupInitialState()
-        router.setupSubmodules()
+        router.setupSubmodules(output: self)
+    }
+}
+
+extension MainTabbarPresenter: SubmodulesOutput {
+    func openAccountSettingsModule() {
+        router.openAccountSettingsModule()
     }
 }
 
