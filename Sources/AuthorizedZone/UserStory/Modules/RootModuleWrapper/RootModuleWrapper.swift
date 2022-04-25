@@ -30,7 +30,7 @@ final class RootModuleWrapper {
         self.authManager = authManager
     }
 
-    func view() -> UINavigationController {
+    func view() -> UIViewController {
         let module = routeMap.mainTabbarModule()
         module._output = self
         return module.view
