@@ -12,9 +12,9 @@ import Module
 typealias MainTabbarModule = Module<MainTabbarModuleInput, MainTabbarModuleOutput>
 
 enum MainTabbarAssembly {
-    static func makeModule() -> MainTabbarModule {
+    static func makeModule(routeMap: RouteMapPrivate) -> MainTabbarModule {
         let view = MainTabbarController()
-        let router = MainTabbarRouter()
+        let router = MainTabbarRouter(routeMap: routeMap)
         let interactor = MainTabbarInteractor()
         let presenter = MainTabbarPresenter(router: router,
                                           interactor: interactor)

@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import Module
 
 protocol RouteMapPrivate {
     func mainTabbarModule() -> MainTabbarModule
+    func openCurrentAccountProfile() -> ModuleProtocol
 }

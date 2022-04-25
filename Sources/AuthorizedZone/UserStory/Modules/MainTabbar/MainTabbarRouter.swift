@@ -8,6 +8,7 @@
 
 import UIKit
 import Module
+import Profile
 
 protocol MainTabbarRouterInput: AnyObject {
     func setupSubmodules()
@@ -15,13 +16,17 @@ protocol MainTabbarRouterInput: AnyObject {
 
 final class MainTabbarRouter {
     weak var transitionHandler: UITabBarController?
+    private let routeMap: RouteMapPrivate
+    
+    init(routeMap: RouteMapPrivate) {
+        self.routeMap = routeMap
+    }
 }
 
 extension MainTabbarRouter: MainTabbarRouterInput {
     func setupSubmodules() {
         transitionHandler?.viewControllers = ModuleType.allCases.map {
-            let viewController = UIViewController()
-            //self.module(type: $0).view
+            let viewController = viewController(type: $0)
             viewController.tabBarItem.image = UIImage(systemName: $0.imageName)
             viewController.tabBarItem.title = $0.title
             return viewController
@@ -31,33 +36,21 @@ extension MainTabbarRouter: MainTabbarRouterInput {
 
 private extension MainTabbarRouter {
     
-    func module(type: ModuleType) -> ModuleProtocol? {
+    func viewController(type: ModuleType) -> UIViewController {
         switch type {
         case .peoples:
-            return peoplesModule()
+            return UIViewController()
         case .posts:
-            return postsModule()
+            return UIViewController()
         case .chats:
-            return chatsModule()
+            return UIViewController()
         case .profile:
-            return accountModule()
+            return accountModule().view
         }
     }
     
-    func peoplesModule() -> ModuleProtocol? {
-        nil
-    }
-    
-    func chatsModule() -> ModuleProtocol? {
-        nil
-    }
-    
-    func postsModule() -> ModuleProtocol? {
-        nil
-    }
-    
-    func accountModule() -> ModuleProtocol? {
-        nil
+    func accountModule() -> ModuleProtocol {
+        routeMap.openCurrentAccountProfile()
     }
     
     enum ModuleType: String, CaseIterable {
