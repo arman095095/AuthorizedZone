@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "account",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/arman095095/Account.git",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "973493aecd05ea308ae0e4371a7ee63be0b9f634"
+      }
+    },
+    {
       "identity" : "alertmanager",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/arman095095/AlertManager.git",
@@ -33,7 +42,7 @@
       "location" : "https://github.com/arman095095/DesignSystem.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "8ed711698941b33ee936ae4daaf1a7098c002ae3"
+        "revision" : "c5588e2cc7e060b93b34f60ba4e5242bb77ada14"
       }
     },
     {
@@ -105,7 +114,7 @@
       "location" : "https://github.com/arman095095/Managers.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "f71be1821f72854fe2615c64a3c9007970a2af64"
+        "revision" : "b89d6d1b351716bf2ec77ec55973b25adb4caa92"
       }
     },
     {
@@ -114,7 +123,7 @@
       "location" : "https://github.com/arman095095/Module.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "c65c606b96a27cf9d6a50826fb842cca714b11cf"
+        "revision" : "98049b3f7a6d8667076fe53e650dadcd4f9ff8da"
       }
     },
     {
@@ -141,7 +150,7 @@
       "location" : "https://github.com/arman095095/Profile.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "fa191df2e293ec771f09ca53efc6284be94618da"
+        "revision" : "a9a235ec9613dc07806eb9718d3f6b98dbf720e9"
       }
     },
     {
@@ -163,12 +172,21 @@
       }
     },
     {
+      "identity" : "selection",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/arman095095/Selection.git",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "8c2f7502e6efac4bdfb9e1dec1613f2d9b94cdc4"
+      }
+    },
+    {
       "identity" : "settings",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/arman095095/Settings.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "1b8ea04cbd3d9a5396433df98fa60fa59a392551"
+        "revision" : "696ed14e21407fafda1896dde332ea29d72d9063"
       }
     },
     {

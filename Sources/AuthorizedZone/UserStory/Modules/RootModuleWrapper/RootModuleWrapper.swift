@@ -23,18 +23,15 @@ public protocol AuthorizedZoneModuleOutput: AnyObject {
 final class RootModuleWrapper {
 
     private let routeMap: RouteMapPrivate
-    private let authManager: AuthManagerProtocol
     weak var output: AuthorizedZoneModuleOutput?
     
-    init(routeMap: RouteMapPrivate,
-         authManager: AuthManagerProtocol) {
+    init(routeMap: RouteMapPrivate) {
         self.routeMap = routeMap
-        self.authManager = authManager
     }
 
     func view() -> UIViewController {
         let module = routeMap.mainTabbarModule()
-        module._output = self
+        module.output = self
         return module.view
     }
 }
@@ -43,29 +40,14 @@ extension RootModuleWrapper: AuthorizedZoneModuleInput {
     
 }
 
-extension RootModuleWrapper: ProfileModuleOutput {
-    func openAccountSettingsModule() {
-        output?.openAccountsSettings()
-    }
-}
-
 extension RootModuleWrapper: MainTabbarModuleOutput {
     func logout() {
-        authManager.signOut()
         output?.openAuthorization()
     }
 }
 
 extension RootModuleWrapper: SettingsModuleOutput {
-    func openUnauthorizedZone() {
-        output?.openAuthorization()
-    }
     
-    func openEditAccount() {
-        output?
-    }
     
-    func openProfileModule(profile: ProfileModelProtocol) {
-        <#code#>
-    }
+    
 }

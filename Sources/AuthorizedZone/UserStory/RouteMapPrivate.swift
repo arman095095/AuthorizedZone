@@ -6,10 +6,11 @@
 //
 
 import Foundation
-import Module
+import Settings
+import Profile
 
 protocol RouteMapPrivate {
     func mainTabbarModule() -> MainTabbarModule
-    func openCurrentAccountProfile() -> ModuleProtocol
-    func openAccountSettings() -> ModuleProtocol
+    func openCurrentAccountProfile() -> ProfileModule
+    func openAccountSettings() -> SettingsModule
 }

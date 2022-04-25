@@ -13,7 +13,7 @@ import Profile
 import Settings
 
 public protocol AuthorizedZoneModuleProtocol: AnyObject {
-    func rootModule() -> ModuleProtocol
+    func rootModule() -> AuthorizedZoneModule
 }
 
 public final class AuthorizedZoneUserStory {
@@ -27,7 +27,7 @@ public final class AuthorizedZoneUserStory {
 }
 
 extension AuthorizedZoneUserStory: AuthorizedZoneModuleProtocol {
-    public func rootModule() -> ModuleProtocol {
+    public func rootModule() -> AuthorizedZoneModule {
         guard let authManager = container.synchronize().resolve(AuthManagerProtocol.self) else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
@@ -40,7 +40,7 @@ extension AuthorizedZoneUserStory: AuthorizedZoneModuleProtocol {
 
 extension AuthorizedZoneUserStory: RouteMapPrivate {
 
-    func openAccountSettings() -> ModuleProtocol {
+    func openAccountSettings() -> SettingsModule {
         let module = SettingsUserStory(container: container).rootModule()
         module.output = outputWrapper
         return module
@@ -48,11 +48,11 @@ extension AuthorizedZoneUserStory: RouteMapPrivate {
     
     func mainTabbarModule() -> MainTabbarModule {
         let module = MainTabbarAssembly.makeModule(routeMap: self)
-        module._output = outputWrapper
+        module.output = outputWrapper
         return module
     }
     
-    func openCurrentAccountProfile() -> ModuleProtocol {
+    func openCurrentAccountProfile() -> ProfileModule {
         guard let account = container.synchronize().resolve(AuthManagerProtocol.self)?.currentAccount?.profile else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }

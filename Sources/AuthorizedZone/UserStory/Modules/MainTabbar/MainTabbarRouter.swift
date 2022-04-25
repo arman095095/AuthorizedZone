@@ -58,7 +58,7 @@ private extension MainTabbarRouter {
         }
     }
     
-    func accountModule(output: ProfileModuleOutput) -> ModuleProtocol {
+    func accountModule(output: ProfileModuleOutput) -> ProfileModule {
         let module = routeMap.openCurrentAccountProfile()
         module.output = output
         return module
