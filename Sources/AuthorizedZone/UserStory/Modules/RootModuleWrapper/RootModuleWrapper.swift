@@ -9,6 +9,7 @@
 import UIKit
 import Module
 import Managers
+import Profile
 
 public protocol AuthorizedZoneModuleInput: AnyObject {
     
@@ -16,6 +17,7 @@ public protocol AuthorizedZoneModuleInput: AnyObject {
 
 public protocol AuthorizedZoneModuleOutput: AnyObject {
     func openAuthorization()
+    func openAccountsSettings()
 }
 
 final class RootModuleWrapper {
@@ -39,6 +41,12 @@ final class RootModuleWrapper {
 
 extension RootModuleWrapper: AuthorizedZoneModuleInput {
     
+}
+
+extension RootModuleWrapper: ProfileModuleOutput {
+    func openAccountSettingsModule() {
+        output?.openAccountsSettings()
+    }
 }
 
 extension RootModuleWrapper: MainTabbarModuleOutput {
