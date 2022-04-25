@@ -33,7 +33,7 @@ final class RootModuleWrapper {
     func view() -> UINavigationController {
         let module = routeMap.mainTabbarModule()
         module._output = self
-        return UINavigationController(rootViewController: module.view)
+        return module.view
     }
 }
 
