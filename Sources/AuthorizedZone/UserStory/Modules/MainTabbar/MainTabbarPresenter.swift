@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlertManager
 
 public protocol MainTabbarModuleOutput: AnyObject {
     func logout()
@@ -26,17 +27,21 @@ final class MainTabbarPresenter {
     weak var output: MainTabbarModuleOutput?
     private let router: MainTabbarRouterInput
     private let interactor: MainTabbarInteractorInput
+    private let alertManager: AlertManagerProtocol
     
     init(router: MainTabbarRouterInput,
-         interactor: MainTabbarInteractorInput) {
+         interactor: MainTabbarInteractorInput,
+         alertManager: AlertManagerProtocol) {
         self.router = router
         self.interactor = interactor
+        self.alertManager = alertManager
     }
 }
 
 extension MainTabbarPresenter: MainTabbarViewOutput {
     func viewWillAppear() {
         view?.setupInitialState()
+        interactor.refreshAccountInfo()
         router.setupSubmodules(output: self)
     }
 }
@@ -48,7 +53,13 @@ extension MainTabbarPresenter: SubmodulesOutput {
 }
 
 extension MainTabbarPresenter: MainTabbarInteractorOutput {
+    func successRefreshed(profile: ProfileModelProtocol) {
+        router.setupSubmodules(output: self, with: profile)
+    }
     
+    func failureRefresh(message: String) {
+        alertManager.present(type: .error, title: message)
+    }
 }
 
 extension MainTabbarPresenter: MainTabbarModuleInput {

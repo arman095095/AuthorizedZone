@@ -45,19 +45,6 @@ extension MainTabbarRouter: MainTabbarRouterInput {
 
 private extension MainTabbarRouter {
     
-    func viewController(output: SubmodulesOutput, type: ModuleType) -> UIViewController {
-        switch type {
-        case .peoples:
-            return UIViewController()
-        case .posts:
-            return UIViewController()
-        case .chats:
-            return UIViewController()
-        case .profile:
-            return accountModule(output: output).view
-        }
-    }
-    
     func accountModule(output: ProfileModuleOutput) -> ProfileModule {
         let module = routeMap.openCurrentAccountProfile()
         module.output = output
