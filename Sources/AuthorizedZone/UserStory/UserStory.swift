@@ -57,7 +57,6 @@ extension AuthorizedZoneUserStory: RouteMapPrivate {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
         let module = ProfileUserStory(container: container).currentAccountModule(profile: account)
-        module.output = outputWrapper
         return module
     }
 }

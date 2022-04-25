@@ -47,7 +47,7 @@ extension RootModuleWrapper: MainTabbarModuleOutput {
 }
 
 extension RootModuleWrapper: SettingsModuleOutput {
-    
-    
-    
+    func openUnauthorizedZone() {
+        output?.openAuthorization()
+    }
 }
