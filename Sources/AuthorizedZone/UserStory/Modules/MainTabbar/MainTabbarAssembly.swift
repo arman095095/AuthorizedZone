@@ -8,16 +8,21 @@
 
 import UIKit
 import Module
+import Managers
+import AlertManager
 
 typealias MainTabbarModule = Module<MainTabbarModuleInput, MainTabbarModuleOutput>
 
 enum MainTabbarAssembly {
-    static func makeModule(routeMap: RouteMapPrivate) -> MainTabbarModule {
+    static func makeModule(routeMap: RouteMapPrivate,
+                           authManager: AuthManagerProtocol,
+                           alertManager: AlertManagerProtocol) -> MainTabbarModule {
         let view = MainTabbarController()
         let router = MainTabbarRouter(routeMap: routeMap)
-        let interactor = MainTabbarInteractor()
+        let interactor = MainTabbarInteractor(authManager: authManager)
         let presenter = MainTabbarPresenter(router: router,
-                                          interactor: interactor)
+                                            interactor: interactor,
+                                            alertManager: alertManager)
         view.output = presenter
         interactor.output = presenter
         presenter.view = view

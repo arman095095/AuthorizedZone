@@ -8,6 +8,7 @@
 
 import UIKit
 import AlertManager
+import Managers
 
 public protocol MainTabbarModuleOutput: AnyObject {
     func logout()
@@ -54,7 +55,7 @@ extension MainTabbarPresenter: SubmodulesOutput {
 
 extension MainTabbarPresenter: MainTabbarInteractorOutput {
     func successRefreshed(profile: ProfileModelProtocol) {
-        router.setupSubmodules(output: self, with: profile)
+        //router.setupSubmodules(output: self, with: profile)
     }
     
     func failureRefresh(message: String) {

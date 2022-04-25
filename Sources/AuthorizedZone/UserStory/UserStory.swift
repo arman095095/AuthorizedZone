@@ -11,6 +11,7 @@ import Swinject
 import Managers
 import Profile
 import Settings
+import AlertManager
 
 public protocol AuthorizedZoneModuleProtocol: AnyObject {
     func rootModule() -> AuthorizedZoneModule
@@ -47,7 +48,13 @@ extension AuthorizedZoneUserStory: RouteMapPrivate {
     }
     
     func mainTabbarModule() -> MainTabbarModule {
-        let module = MainTabbarAssembly.makeModule(routeMap: self)
+        guard let authManager = container.synchronize().resolve(AuthManagerProtocol.self),
+              let alertManager = container.synchronize().resolve(AlertManagerProtocol.self) else {
+            fatalError(ErrorMessage.dependency.localizedDescription)
+        }
+        let module = MainTabbarAssembly.makeModule(routeMap: self,
+                                                   authManager: authManager,
+                                                   alertManager: alertManager)
         module.output = outputWrapper
         return module
     }
