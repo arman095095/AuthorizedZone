@@ -12,7 +12,6 @@ import Swinject
 
 public final class AuthorizedZoneUserStoryAssembly {
     public static func assemble(container: Container) {
-        AuthManagerAssembly.assemble(container: container)
-        SettingsUserStoryAssembly.assemble(container: container)
+        ProfilesManagerAssembly.assembly(container: container)
     }
 }
