@@ -15,7 +15,7 @@
       "location" : "https://github.com/arman095095/Account.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "973493aecd05ea308ae0e4371a7ee63be0b9f634"
+        "revision" : "4b49f81db265c1fa679d8df7e1de6c9fdf1a7e3b"
       }
     },
     {
@@ -114,7 +114,7 @@
       "location" : "https://github.com/arman095095/Managers.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "b89d6d1b351716bf2ec77ec55973b25adb4caa92"
+        "revision" : "a3e9e7c42566733f7c93545a397f9494679d422b"
       }
     },
     {
@@ -150,7 +150,7 @@
       "location" : "https://github.com/arman095095/Profile.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "a9a235ec9613dc07806eb9718d3f6b98dbf720e9"
+        "revision" : "84a0e3a7f1da89cb52690e99697610d2a304670b"
       }
     },
     {
@@ -186,7 +186,7 @@
       "location" : "https://github.com/arman095095/Settings.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "40d0e6a9a17c259e7271b1365490a5679c7b03e6"
+        "revision" : "725fb02fae65252febe0ccb54d43134ff53299d5"
       }
     },
     {

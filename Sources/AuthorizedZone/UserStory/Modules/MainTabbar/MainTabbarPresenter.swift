@@ -54,8 +54,7 @@ extension MainTabbarPresenter: SubmodulesOutput {
 }
 
 extension MainTabbarPresenter: MainTabbarInteractorOutput {
-    func successRefreshed(profile: ProfileModelProtocol) {
-        //router.setupSubmodules(output: self, with: profile)
+    func successRefreshed() {
     }
     
     func failureRefresh(message: String) {

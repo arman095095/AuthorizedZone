@@ -48,19 +48,19 @@ extension AuthorizedZoneUserStory: RouteMapPrivate {
     }
     
     func mainTabbarModule() -> MainTabbarModule {
-        guard let authManager = container.synchronize().resolve(AuthManagerProtocol.self),
+        guard let accountManager = container.synchronize().resolve(AccountManagerProtocol.self),
               let alertManager = container.synchronize().resolve(AlertManagerProtocol.self) else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
         let module = MainTabbarAssembly.makeModule(routeMap: self,
-                                                   authManager: authManager,
+                                                   accountManager: accountManager,
                                                    alertManager: alertManager)
         module.output = outputWrapper
         return module
     }
     
     func openCurrentAccountProfile() -> ProfileModule {
-        guard let account = container.synchronize().resolve(AuthManagerProtocol.self)?.currentAccount?.profile else {
+        guard let account = container.synchronize().resolve(AccountManagerProtocol.self)?.account?.profile else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
         let module = ProfileUserStory(container: container).currentAccountModule(profile: account)

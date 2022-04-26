@@ -14,28 +14,37 @@ protocol MainTabbarInteractorInput: AnyObject {
 }
 
 protocol MainTabbarInteractorOutput: AnyObject {
-    func successRefreshed(profile: ProfileModelProtocol)
+    func successRefreshed()
     func failureRefresh(message: String)
 }
 
 final class MainTabbarInteractor {
     
     weak var output: MainTabbarInteractorOutput?
-    private let authManager: AuthManagerProtocol
+    private let accountManager: AccountManagerProtocol
     
-    init(authManager: AuthManagerProtocol) {
-        self.authManager = authManager
+    init(accountManager: AccountManagerProtocol) {
+        self.accountManager = accountManager
     }
 }
 
 extension MainTabbarInteractor: MainTabbarInteractorInput {
     func refreshAccountInfo() {
-        authManager.getAccount { [weak self] result in
+        accountManager.launch { result in
             switch result {
-            case .success(let account):
-                self?.output?.successRefreshed(profile: account.profile)
+            case .success:
+                break
             case .failure(let error):
-                self?.output?.failureRefresh(message: error.localizedDescription)
+                switch error {
+                case .another(error: let error):
+                    break
+                case .profile(value: let value):
+                    break
+                case .remove(value: let value):
+                    break
+                case .blocking(value: let value):
+                    break
+                }
             }
         }
     }
