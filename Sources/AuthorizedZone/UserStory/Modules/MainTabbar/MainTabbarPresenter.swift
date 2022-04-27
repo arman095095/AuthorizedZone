@@ -11,7 +11,7 @@ import AlertManager
 import Managers
 
 public protocol MainTabbarModuleOutput: AnyObject {
-    func logout()
+    func openUnauthorizedZone()
 }
 
 protocol MainTabbarModuleInput: AnyObject {

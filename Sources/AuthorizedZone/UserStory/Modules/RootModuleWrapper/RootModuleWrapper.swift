@@ -36,15 +36,9 @@ final class RootModuleWrapper {
     }
 }
 
-extension RootModuleWrapper: AuthorizedZoneModuleInput {
-    
-}
+extension RootModuleWrapper: AuthorizedZoneModuleInput { }
 
-extension RootModuleWrapper: MainTabbarModuleOutput {
-    func logout() {
-        output?.openAuthorization()
-    }
-}
+extension RootModuleWrapper: MainTabbarModuleOutput { }
 
 extension RootModuleWrapper: SettingsModuleOutput {
     func openUnauthorizedZone() {
