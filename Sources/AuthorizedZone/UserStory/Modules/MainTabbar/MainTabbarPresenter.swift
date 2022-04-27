@@ -54,11 +54,40 @@ extension MainTabbarPresenter: SubmodulesOutput {
 }
 
 extension MainTabbarPresenter: MainTabbarInteractorOutput {
+    func successRecovered() {
+        // TO DO
+    }
+    
+    func failureRecover(message: String) {
+        alertManager.present(type: .error, title: message)
+        self.logout()
+    }
+    
+    func profileRemoved() {
+        router.openRecoverAlert()
+    }
+    
+    func profileEmpty() {
+        self.logout()
+    }
+    
     func successRefreshed() {
+        // TO DO
     }
     
     func failureRefresh(message: String) {
         alertManager.present(type: .error, title: message)
+    }
+}
+
+extension MainTabbarPresenter: MainTabbarRouterOutput {
+    func logout() {
+        interactor.logout()
+        output?.openUnauthorizedZone()
+    }
+    
+    func recoverAccount() {
+        interactor.recoverProfile()
     }
 }
 

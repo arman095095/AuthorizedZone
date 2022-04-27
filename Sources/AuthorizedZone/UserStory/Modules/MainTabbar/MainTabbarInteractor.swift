@@ -11,11 +11,17 @@ import Managers
 
 protocol MainTabbarInteractorInput: AnyObject {
     func refreshAccountInfo()
+    func recoverProfile()
+    func logout()
 }
 
 protocol MainTabbarInteractorOutput: AnyObject {
+    func profileRemoved()
+    func profileEmpty()
     func successRefreshed()
+    func successRecovered()
     func failureRefresh(message: String)
+    func failureRecover(message: String)
 }
 
 final class MainTabbarInteractor {
@@ -29,21 +35,40 @@ final class MainTabbarInteractor {
 }
 
 extension MainTabbarInteractor: MainTabbarInteractorInput {
+    
+    func recoverProfile() {
+        accountManager.recoverAccount { [weak self] result in
+            switch result {
+            case .success:
+                self?.output?.successRecovered()
+            case .failure(let error):
+                switch error {
+                case .cantRecover:
+                    self?.output?.failureRecover(message: error.localizedDescription)
+                default:
+                    self?.output?.profileEmpty()
+                }
+            }
+        }
+    }
+    
+    func logout() {
+        accountManager.signOut()
+    }
+    
     func refreshAccountInfo() {
-        accountManager.launch { result in
+        accountManager.launch { [weak self] result in
             switch result {
             case .success:
                 break
             case .failure(let error):
                 switch error {
+                case .emptyProfile:
+                    self?.output?.profileEmpty()
+                case .profileRemoved:
+                    self?.output?.profileRemoved()
                 case .another(error: let error):
-                    break
-                case .profile(value: let value):
-                    break
-                case .remove(value: let value):
-                    break
-                case .blocking(value: let value):
-                    break
+                    self?.output?.failureRefresh(message: error.localizedDescription)
                 }
             }
         }

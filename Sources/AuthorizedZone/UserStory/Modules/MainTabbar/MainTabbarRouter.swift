@@ -15,11 +15,18 @@ typealias SubmodulesOutput = ProfileModuleOutput
 
 protocol MainTabbarRouterInput: AnyObject {
     func setupSubmodules(output: SubmodulesOutput)
+    func openRecoverAlert()
     func openAccountSettingsModule()
+}
+
+protocol MainTabbarRouterOutput: AnyObject {
+    func logout()
+    func recoverAccount()
 }
 
 final class MainTabbarRouter {
     weak var transitionHandler: UITabBarController?
+    weak var output: MainTabbarRouterOutput?
     private let routeMap: RouteMapPrivate
     
     init(routeMap: RouteMapPrivate) {
@@ -28,6 +35,15 @@ final class MainTabbarRouter {
 }
 
 extension MainTabbarRouter: MainTabbarRouterInput {
+
+    func openRecoverAlert() {
+        transitionHandler?.showAlertForRecover(acceptHandler: {
+            self.output?.recoverAccount()
+        }, denyHandler: {
+            self.output?.logout()
+        })
+    }
+    
     func setupSubmodules(output: SubmodulesOutput) {
         transitionHandler?.viewControllers = ModuleType.allCases.map {
             let viewController = UIViewController() //viewController(output: output, type: $0)
