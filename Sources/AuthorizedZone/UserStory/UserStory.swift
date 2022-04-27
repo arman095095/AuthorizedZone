@@ -29,11 +29,7 @@ public final class AuthorizedZoneUserStory {
 
 extension AuthorizedZoneUserStory: AuthorizedZoneModuleProtocol {
     public func rootModule() -> AuthorizedZoneModule {
-        guard let authManager = container.synchronize().resolve(AuthManagerProtocol.self) else {
-            fatalError(ErrorMessage.dependency.localizedDescription)
-        }
-        let module = RootModuleWrapperAssembly.makeModule(authManager: authManager,
-                                                          routeMap: self)
+        let module = RootModuleWrapperAssembly.makeModule(routeMap: self)
         outputWrapper = module.input as? RootModuleWrapper
         return module
     }
