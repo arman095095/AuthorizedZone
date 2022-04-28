@@ -46,15 +46,16 @@ extension MainTabbarRouter: MainTabbarRouterInput {
     
     func setupSubmodules(output: SubmodulesOutput) {
         transitionHandler?.viewControllers = ModuleType.allCases.map {
+            var viewController: UIViewController
             switch $0 {
             case .profile:
-                return accountModule(output: output).view
+                viewController = accountModule(output: output).view
             default:
-                let viewController = UIViewController()
-                viewController.tabBarItem.image = UIImage(systemName: $0.imageName)
-                viewController.tabBarItem.title = $0.title
-                return viewController
+                viewController = UIViewController()
             }
+            viewController.tabBarItem.image = UIImage(systemName: $0.imageName)
+            viewController.tabBarItem.title = $0.title
+            return viewController
         }
     }
     
