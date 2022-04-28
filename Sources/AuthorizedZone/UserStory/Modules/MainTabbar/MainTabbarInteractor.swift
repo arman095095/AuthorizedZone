@@ -60,7 +60,7 @@ extension MainTabbarInteractor: MainTabbarInteractorInput {
         accountManager.launch { [weak self] result in
             switch result {
             case .success:
-                break
+                self?.output?.successRefreshed()
             case .failure(let error):
                 switch error {
                 case .emptyProfile:

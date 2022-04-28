@@ -43,7 +43,6 @@ extension MainTabbarPresenter: MainTabbarViewOutput {
     func viewWillAppear() {
         view?.setupInitialState()
         interactor.refreshAccountInfo()
-        router.setupSubmodules(output: self)
     }
 }
 
@@ -55,7 +54,7 @@ extension MainTabbarPresenter: SubmodulesOutput {
 
 extension MainTabbarPresenter: MainTabbarInteractorOutput {
     func successRecovered() {
-        // TO DO
+        
     }
     
     func failureRecover(message: String) {
@@ -72,7 +71,7 @@ extension MainTabbarPresenter: MainTabbarInteractorOutput {
     }
     
     func successRefreshed() {
-        // TO DO
+        router.setupSubmodules(output: self)
     }
     
     func failureRefresh(message: String) {
