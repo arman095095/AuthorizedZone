@@ -54,7 +54,6 @@ final class MainTabbarPresenter {
 extension MainTabbarPresenter: MainTabbarViewOutput {
     func viewWillAppear() {
         guard !tabbarItemsConfigured else { return }
-        router.setupTabbarItems(output: self)
         switch context {
         case .afterAuthorization(let account):
             interactor.saveAccount(account: account)
@@ -89,6 +88,7 @@ extension MainTabbarPresenter: MainTabbarInteractorOutput {
     }
     
     func successRefreshed() {
+        router.setupTabbarItems(output: self)
         switch context {
         case .afterAuthorization:
             self.context = .afterLaunch
