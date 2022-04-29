@@ -15,7 +15,7 @@
       "location" : "https://github.com/arman095095/Account.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "36bdf3b40da494ce693699596f479f41e544fd99"
+        "revision" : "16654cf35baa875330fe6b5f8ffc51ba5ffad70c"
       }
     },
     {
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/gtm-session-fetcher.git",
       "state" : {
-        "revision" : "eca9404a18f53727e4698211aaf2615eb93b962a",
-        "version" : "1.7.1"
+        "revision" : "4e9bbf2808b8fee444e84a48f5f3c12641987d3e",
+        "version" : "1.7.2"
       }
     },
     {
@@ -114,7 +114,7 @@
       "location" : "https://github.com/arman095095/Managers.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "67efcbc02eb71fec16c1e49bb369ea093e0c06b1"
+        "revision" : "b535cef29fc7c7d250b3244fcc0cd3b66bf336fb"
       }
     },
     {
@@ -150,7 +150,7 @@
       "location" : "https://github.com/arman095095/Profile.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "84a0e3a7f1da89cb52690e99697610d2a304670b"
+        "revision" : "bbb68870a63e6523697d923035029b3316a51579"
       }
     },
     {
@@ -177,7 +177,7 @@
       "location" : "https://github.com/arman095095/Selection.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "8c2f7502e6efac4bdfb9e1dec1613f2d9b94cdc4"
+        "revision" : "a22f16e664421458f64c50dae628389f7c3086e4"
       }
     },
     {
@@ -186,7 +186,7 @@
       "location" : "https://github.com/arman095095/Settings.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "725fb02fae65252febe0ccb54d43134ff53299d5"
+        "revision" : "1af6d2e577a0c0c1e60536514d324cc4872b4120"
       }
     },
     {

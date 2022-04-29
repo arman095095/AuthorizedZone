@@ -41,7 +41,6 @@ final class MainTabbarPresenter {
 
 extension MainTabbarPresenter: MainTabbarViewOutput {
     func viewWillAppear() {
-        view?.setupInitialState()
         interactor.refreshAccountInfo()
     }
 }
@@ -66,7 +65,8 @@ extension MainTabbarPresenter: MainTabbarInteractorOutput {
         router.openRecoverAlert()
     }
     
-    func profileEmpty() {
+    func profileEmpty(message: String) {
+        alertManager.present(type: .error, title: message)
         self.logout()
     }
     

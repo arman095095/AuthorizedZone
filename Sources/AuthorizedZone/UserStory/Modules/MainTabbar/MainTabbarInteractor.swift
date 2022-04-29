@@ -17,7 +17,7 @@ protocol MainTabbarInteractorInput: AnyObject {
 
 protocol MainTabbarInteractorOutput: AnyObject {
     func profileRemoved()
-    func profileEmpty()
+    func profileEmpty(message: String)
     func successRefreshed()
     func successRecovered()
     func failureRefresh(message: String)
@@ -46,7 +46,7 @@ extension MainTabbarInteractor: MainTabbarInteractorInput {
                 case .cantRecover:
                     self?.output?.failureRecover(message: error.localizedDescription)
                 default:
-                    self?.output?.profileEmpty()
+                    self?.output?.profileEmpty(message: error.localizedDescription)
                 }
             }
         }
@@ -64,7 +64,7 @@ extension MainTabbarInteractor: MainTabbarInteractorInput {
             case .failure(let error):
                 switch error {
                 case .emptyProfile:
-                    self?.output?.profileEmpty()
+                    self?.output?.profileEmpty(message: error.localizedDescription)
                 case .profileRemoved:
                     self?.output?.profileRemoved()
                 case .another(error: let error):

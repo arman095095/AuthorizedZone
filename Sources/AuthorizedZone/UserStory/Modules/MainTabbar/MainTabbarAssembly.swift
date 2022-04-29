@@ -26,6 +26,7 @@ enum MainTabbarAssembly {
         view.output = presenter
         interactor.output = presenter
         presenter.view = view
+        router.output = presenter
         router.transitionHandler = view
         return MainTabbarModule(input: presenter, view: view) {
             presenter.output = $0

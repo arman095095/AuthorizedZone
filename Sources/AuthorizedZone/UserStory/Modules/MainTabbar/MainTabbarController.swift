@@ -9,16 +9,18 @@
 import UIKit
 import DesignSystem
 
-protocol MainTabbarViewInput: AnyObject {
-    func setupInitialState()
-}
+protocol MainTabbarViewInput: AnyObject { }
 
 final class MainTabbarController: UITabBarController {
     var output: MainTabbarViewOutput?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        view.backgroundColor = .white
         output?.viewWillAppear()
     }
 }
@@ -31,6 +33,7 @@ private extension MainTabbarController {
     }
     
     func setupViews() {
+        view.backgroundColor = .white
         tabBar.barTintColor = .systemGray6
         tabBar.layer.borderWidth = 0
         tabBar.clipsToBounds = true
@@ -47,8 +50,4 @@ private extension MainTabbarController {
     }*/
 }
 
-extension MainTabbarController: MainTabbarViewInput {
-    func setupInitialState() {
-        setupViews()
-    }
-}
+extension MainTabbarController: MainTabbarViewInput { }
