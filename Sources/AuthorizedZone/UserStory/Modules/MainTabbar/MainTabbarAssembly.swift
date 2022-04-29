@@ -21,10 +21,12 @@ enum MainTabbarAssembly {
         let view = MainTabbarController()
         let router = MainTabbarRouter(routeMap: routeMap)
         let interactor = MainTabbarInteractor(accountManager: accountManager)
+        let stringFactory = AuthorizedZoneStringFactory()
         let presenter = MainTabbarPresenter(router: router,
                                             interactor: interactor,
                                             alertManager: alertManager,
-                                            context: context)
+                                            context: context,
+                                            stringFactory: stringFactory)
         view.output = presenter
         interactor.output = presenter
         presenter.view = view

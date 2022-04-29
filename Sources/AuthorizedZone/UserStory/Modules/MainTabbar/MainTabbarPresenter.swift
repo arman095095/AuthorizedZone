@@ -11,13 +11,15 @@ import AlertManager
 import Managers
 import Module
 
+protocol MainTabbarStringFactoryProtocol {
+    var successRecoverMessage: String { get }
+}
+
 public protocol MainTabbarModuleOutput: AnyObject {
     func openUnauthorizedZone()
 }
 
-protocol MainTabbarModuleInput: AnyObject {
-    
-}
+protocol MainTabbarModuleInput: AnyObject { }
 
 protocol MainTabbarViewOutput: AnyObject {
     func viewWillAppear()
@@ -36,17 +38,20 @@ final class MainTabbarPresenter {
     private var context: InputFlowContext
     private let interactor: MainTabbarInteractorInput
     private let alertManager: AlertManagerProtocol
+    private let stringFactory: MainTabbarStringFactoryProtocol
     // Костыль, потому что viewDidLoad вызывается у UITabbarController на момент инициализации
     private var tabbarItemsConfigured: Bool
     
     init(router: MainTabbarRouterInput,
          interactor: MainTabbarInteractorInput,
          alertManager: AlertManagerProtocol,
-         context: InputFlowContext) {
+         context: InputFlowContext,
+         stringFactory: MainTabbarStringFactoryProtocol) {
         self.router = router
         self.interactor = interactor
         self.alertManager = alertManager
         self.context = context
+        self.stringFactory = stringFactory
         self.tabbarItemsConfigured = false
     }
 }
@@ -72,6 +77,7 @@ extension MainTabbarPresenter: SubmodulesOutput {
 extension MainTabbarPresenter: MainTabbarInteractorOutput {
 
     func successRecovered() {
+        alertManager.present(type: .success, title: stringFactory.successRecoverMessage)
         configureSubmodulesAndContext()
     }
     
