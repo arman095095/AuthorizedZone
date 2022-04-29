@@ -10,7 +10,7 @@ import Settings
 import Profile
 
 protocol RouteMapPrivate {
-    func mainTabbarModule() -> MainTabbarModule
+    func mainTabbarModule(context: InputFlowContext) -> MainTabbarModule
     func openCurrentAccountProfile() -> ProfileModule
     func openAccountSettings() -> SettingsModule
 }

@@ -29,8 +29,8 @@ final class RootModuleWrapper {
         self.routeMap = routeMap
     }
 
-    func view() -> UIViewController {
-        let module = routeMap.mainTabbarModule()
+    func view(context: InputFlowContext) -> UIViewController {
+        var module = routeMap.mainTabbarModule(context: context)
         module.output = self
         return module.view
     }

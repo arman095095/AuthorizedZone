@@ -11,9 +11,8 @@ import Settings
 import Swinject
 
 public final class AuthorizedZoneUserStoryAssembly {
-    public static func assemble(container: Container,
-                                context: AccountManagerContext) {
-        AccountManagerAssembly.assemble(container: container, context: context)
+    public static func assemble(container: Container) {
+        AccountManagerAssembly.assemble(container: container)
         ProfilesManagerAssembly.assembly(container: container)
     }
 }

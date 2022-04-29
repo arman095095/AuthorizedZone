@@ -9,6 +9,7 @@
 import UIKit
 import AlertManager
 import Managers
+import Module
 
 public protocol MainTabbarModuleOutput: AnyObject {
     func openUnauthorizedZone()
@@ -22,28 +23,44 @@ protocol MainTabbarViewOutput: AnyObject {
     func viewWillAppear()
 }
 
+public enum InputFlowContext {
+    case afterAuthorization(account: AccountModelProtocol)
+    case afterLaunch
+}
+
 final class MainTabbarPresenter {
     
     weak var view: MainTabbarViewInput?
     weak var output: MainTabbarModuleOutput?
     private let router: MainTabbarRouterInput
+    private var context: InputFlowContext
     private let interactor: MainTabbarInteractorInput
     private let alertManager: AlertManagerProtocol
-    private var submodulesConfigurated: Bool
+    // Костыль, потому что viewDidLoad вызывается у UITabbarController на момент инициализации
+    private var tabbarItemsConfigured: Bool
     
     init(router: MainTabbarRouterInput,
          interactor: MainTabbarInteractorInput,
-         alertManager: AlertManagerProtocol) {
+         alertManager: AlertManagerProtocol,
+         context: InputFlowContext) {
         self.router = router
         self.interactor = interactor
         self.alertManager = alertManager
-        self.submodulesConfigurated = false
+        self.context = context
+        self.tabbarItemsConfigured = false
     }
 }
 
 extension MainTabbarPresenter: MainTabbarViewOutput {
     func viewWillAppear() {
-        interactor.refreshAccountInfo()
+        guard !tabbarItemsConfigured else { return }
+        router.setupTabbarItems(output: self)
+        switch context {
+        case .afterAuthorization(let account):
+            interactor.saveAccount(account: account)
+        case .afterLaunch:
+            interactor.updateAccount()
+        }
     }
 }
 
@@ -55,9 +72,7 @@ extension MainTabbarPresenter: SubmodulesOutput {
 
 extension MainTabbarPresenter: MainTabbarInteractorOutput {
 
-    func successRecovered() {
-        router.setupSubmodules(output: self)
-    }
+    func successRecovered() { }
     
     func failureRecover(message: String) {
         alertManager.present(type: .error, title: message)
@@ -74,8 +89,12 @@ extension MainTabbarPresenter: MainTabbarInteractorOutput {
     }
     
     func successRefreshed() {
-        guard !submodulesConfigurated else { return }
-        router.setupSubmodules(output: self)
+        switch context {
+        case .afterAuthorization:
+            self.context = .afterLaunch
+        case .afterLaunch:
+            break
+        }
     }
     
     func failureRefresh(message: String) {
@@ -84,8 +103,9 @@ extension MainTabbarPresenter: MainTabbarInteractorOutput {
 }
 
 extension MainTabbarPresenter: MainTabbarRouterOutput {
-    func submodulesSetuped() {
-        submodulesConfigurated = true
+
+    func tabbarItemsSetuped() {
+        tabbarItemsConfigured = true
     }
     
     func logout() {

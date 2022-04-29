@@ -16,13 +16,15 @@ typealias MainTabbarModule = Module<MainTabbarModuleInput, MainTabbarModuleOutpu
 enum MainTabbarAssembly {
     static func makeModule(routeMap: RouteMapPrivate,
                            accountManager: AccountManagerProtocol,
-                           alertManager: AlertManagerProtocol) -> MainTabbarModule {
+                           alertManager: AlertManagerProtocol,
+                           context: InputFlowContext) -> MainTabbarModule {
         let view = MainTabbarController()
         let router = MainTabbarRouter(routeMap: routeMap)
         let interactor = MainTabbarInteractor(accountManager: accountManager)
         let presenter = MainTabbarPresenter(router: router,
                                             interactor: interactor,
-                                            alertManager: alertManager)
+                                            alertManager: alertManager,
+                                            context: context)
         view.output = presenter
         interactor.output = presenter
         presenter.view = view

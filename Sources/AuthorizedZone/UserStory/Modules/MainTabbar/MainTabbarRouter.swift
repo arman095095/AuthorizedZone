@@ -14,7 +14,7 @@ import Settings
 typealias SubmodulesOutput = ProfileModuleOutput
 
 protocol MainTabbarRouterInput: AnyObject {
-    func setupSubmodules(output: SubmodulesOutput)
+    func setupTabbarItems(output: SubmodulesOutput)
     func openRecoverAlert()
     func openAccountSettingsModule()
 }
@@ -22,7 +22,7 @@ protocol MainTabbarRouterInput: AnyObject {
 protocol MainTabbarRouterOutput: AnyObject {
     func logout()
     func recoverAccount()
-    func submodulesSetuped()
+    func tabbarItemsSetuped()
 }
 
 final class MainTabbarRouter {
@@ -36,7 +36,7 @@ final class MainTabbarRouter {
 }
 
 extension MainTabbarRouter: MainTabbarRouterInput {
-
+    
     func openRecoverAlert() {
         transitionHandler?.showAlertForRecover(acceptHandler: {
             self.output?.recoverAccount()
@@ -45,20 +45,19 @@ extension MainTabbarRouter: MainTabbarRouterInput {
         })
     }
     
-    func setupSubmodules(output: SubmodulesOutput) {
-        transitionHandler?.viewControllers = ModuleType.allCases.map {
+    func setupTabbarItems(output: SubmodulesOutput) {
+        transitionHandler?.viewControllers = UITabBarItem.ModuleType.allCases.map {
             var viewController: UIViewController
             switch $0 {
             case .profile:
-                viewController = accountModule(output: output).view
+                viewController = self.accountModule(output: output).view
             default:
                 viewController = UIViewController()
             }
-            viewController.tabBarItem.image = UIImage(systemName: $0.imageName)
-            viewController.tabBarItem.title = $0.title
+            viewController.tabBarItem.itemType = $0
             return viewController
         }
-        self.output?.submodulesSetuped()
+        self.output?.tabbarItemsSetuped()
     }
     
     func openAccountSettingsModule() {
@@ -68,31 +67,19 @@ extension MainTabbarRouter: MainTabbarRouterInput {
 }
 
 private extension MainTabbarRouter {
-    
     func accountModule(output: ProfileModuleOutput) -> ProfileModule {
         let module = routeMap.openCurrentAccountProfile()
         module.output = output
         return module
     }
-    
+}
+
+extension UITabBarItem {
     enum ModuleType: String, CaseIterable {
-        case peoples
-        case posts
-        case chats
-        case profile
-        
-        var title: String {
-            switch self {
-            case .peoples:
-                return "Знакомства"
-            case .posts:
-                return "Лента"
-            case .chats:
-                return "Чаты"
-            case .profile:
-                return "Профиль"
-            }
-        }
+        case peoples = "Знакомства"
+        case posts = "Лента"
+        case chats = "Чаты"
+        case profile = "Профиль"
         
         var imageName: String {
             switch self {
@@ -105,6 +92,19 @@ private extension MainTabbarRouter {
             case .profile:
                 return "person.crop.circle.fill"
             }
+        }
+    }
+    
+    var itemType: ModuleType? {
+        set {
+            guard let type = newValue else { return }
+            image = UIImage(systemName: type.imageName)
+            title = type.rawValue
+        }
+        
+        get {
+            guard let title = title else { return nil }
+            return ModuleType(rawValue: title)
         }
     }
 }

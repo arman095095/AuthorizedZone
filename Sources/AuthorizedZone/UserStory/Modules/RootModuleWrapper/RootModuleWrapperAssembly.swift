@@ -13,9 +13,9 @@ import Managers
 public typealias AuthorizedZoneModule = Module<AuthorizedZoneModuleInput, AuthorizedZoneModuleOutput>
 
 enum RootModuleWrapperAssembly {
-    static func makeModule(routeMap: RouteMapPrivate) -> AuthorizedZoneModule {
+    static func makeModule(routeMap: RouteMapPrivate, context: InputFlowContext) -> AuthorizedZoneModule {
         let wrapper = RootModuleWrapper(routeMap: routeMap)
-        return AuthorizedZoneModule(input: wrapper, view: wrapper.view()) {
+        return AuthorizedZoneModule(input: wrapper, view: wrapper.view(context: context)) {
             wrapper.output = $0
         }
     }

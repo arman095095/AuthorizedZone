@@ -14,7 +14,7 @@ import Settings
 import AlertManager
 
 public protocol AuthorizedZoneModuleProtocol: AnyObject {
-    func rootModule() -> AuthorizedZoneModule
+    func rootModule(context: InputFlowContext) -> AuthorizedZoneModule
 }
 
 public final class AuthorizedZoneUserStory {
@@ -28,8 +28,8 @@ public final class AuthorizedZoneUserStory {
 }
 
 extension AuthorizedZoneUserStory: AuthorizedZoneModuleProtocol {
-    public func rootModule() -> AuthorizedZoneModule {
-        let module = RootModuleWrapperAssembly.makeModule(routeMap: self)
+    public func rootModule(context: InputFlowContext) -> AuthorizedZoneModule {
+        let module = RootModuleWrapperAssembly.makeModule(routeMap: self, context: context)
         outputWrapper = module.input as? RootModuleWrapper
         return module
     }
@@ -43,23 +43,24 @@ extension AuthorizedZoneUserStory: RouteMapPrivate {
         return module
     }
     
-    func mainTabbarModule() -> MainTabbarModule {
+    func mainTabbarModule(context: InputFlowContext) -> MainTabbarModule {
         guard let accountManager = container.synchronize().resolve(AccountManagerProtocol.self),
               let alertManager = container.synchronize().resolve(AlertManagerProtocol.self) else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
         let module = MainTabbarAssembly.makeModule(routeMap: self,
                                                    accountManager: accountManager,
-                                                   alertManager: alertManager)
+                                                   alertManager: alertManager,
+                                                   context: context)
         module.output = outputWrapper
         return module
     }
     
     func openCurrentAccountProfile() -> ProfileModule {
-        guard let account = container.synchronize().resolve(AccountManagerProtocol.self)?.account?.profile else {
+        guard let accountProfile = container.synchronize().resolve(AccountModelProtocol.self)?.profile else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
-        let module = ProfileUserStory(container: container).currentAccountModule(profile: account)
+        let module = ProfileUserStory(container: container).currentAccountModule(profile: accountProfile)
         return module
     }
 }

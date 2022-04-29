@@ -10,7 +10,8 @@ import UIKit
 import Managers
 
 protocol MainTabbarInteractorInput: AnyObject {
-    func refreshAccountInfo()
+    func updateAccount()
+    func saveAccount(account: AccountModelProtocol)
     func recoverProfile()
     func logout()
 }
@@ -42,12 +43,7 @@ extension MainTabbarInteractor: MainTabbarInteractorInput {
             case .success:
                 self?.output?.successRecovered()
             case .failure(let error):
-                switch error {
-                case .cantRecover:
-                    self?.output?.failureRecover(message: error.localizedDescription)
-                default:
-                    self?.output?.profileEmpty(message: error.localizedDescription)
-                }
+                self?.handle(recoverError: error)
             }
         }
     }
@@ -56,21 +52,47 @@ extension MainTabbarInteractor: MainTabbarInteractorInput {
         accountManager.signOut()
     }
     
-    func refreshAccountInfo() {
-        accountManager.launch { [weak self] result in
+    func updateAccount() {
+        accountManager.processAccountAfterLaunch { [weak self] result in
             switch result {
             case .success:
                 self?.output?.successRefreshed()
             case .failure(let error):
-                switch error {
-                case .emptyProfile:
-                    self?.output?.profileEmpty(message: error.localizedDescription)
-                case .profileRemoved:
-                    self?.output?.profileRemoved()
-                case .another(error: let error):
-                    self?.output?.failureRefresh(message: error.localizedDescription)
-                }
+                self?.handle(profileError: error)
             }
+        }
+    }
+    
+    func saveAccount(account: AccountModelProtocol) {
+        accountManager.processAccountAfterSuccessAuthorization(account: account) { [weak self] result in
+            switch result {
+            case .success:
+                self?.output?.successRefreshed()
+            case .failure(let error):
+                self?.handle(profileError: error)
+            }
+        }
+    }
+}
+
+private extension MainTabbarInteractor {
+    func handle(profileError: AccountManagerError.Profile) {
+        switch profileError {
+        case .emptyProfile:
+            output?.profileEmpty(message: profileError.localizedDescription)
+        case .profileRemoved:
+            output?.profileRemoved()
+        case .another(error: let error):
+            output?.failureRefresh(message: error.localizedDescription)
+        }
+    }
+    
+    func handle(recoverError: AccountManagerError.Remove) {
+        switch recoverError {
+        case .cantRecover:
+            output?.failureRecover(message: recoverError.localizedDescription)
+        default:
+            output?.profileEmpty(message: recoverError.localizedDescription)
         }
     }
 }
