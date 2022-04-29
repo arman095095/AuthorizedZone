@@ -71,11 +71,12 @@ extension MainTabbarPresenter: SubmodulesOutput {
 
 extension MainTabbarPresenter: MainTabbarInteractorOutput {
 
-    func successRecovered() { }
+    func successRecovered() {
+        configureSubmodulesAndContext()
+    }
     
-    func failureRecover(message: String) {
-        alertManager.present(type: .error, title: message)
-        self.logout()
+    func successRefreshed() {
+        configureSubmodulesAndContext()
     }
     
     func profileRemoved() {
@@ -87,18 +88,13 @@ extension MainTabbarPresenter: MainTabbarInteractorOutput {
         self.logout()
     }
     
-    func successRefreshed() {
-        router.setupTabbarItems(output: self)
-        switch context {
-        case .afterAuthorization:
-            self.context = .afterLaunch
-        case .afterLaunch:
-            break
-        }
-    }
-    
     func failureRefresh(message: String) {
         alertManager.present(type: .error, title: message)
+    }
+    
+    func failureRecover(message: String) {
+        alertManager.present(type: .error, title: message)
+        self.logout()
     }
 }
 
@@ -120,4 +116,16 @@ extension MainTabbarPresenter: MainTabbarRouterOutput {
 
 extension MainTabbarPresenter: MainTabbarModuleInput {
     
+}
+
+private extension MainTabbarPresenter {
+    func configureSubmodulesAndContext() {
+        router.setupTabbarItems(output: self)
+        switch context {
+        case .afterAuthorization:
+            self.context = .afterLaunch
+        case .afterLaunch:
+            break
+        }
+    }
 }
