@@ -30,7 +30,7 @@ final class RootModuleWrapper {
     }
 
     func view(context: InputFlowContext) -> UIViewController {
-        var module = routeMap.mainTabbarModule(context: context)
+        let module = routeMap.mainTabbarModule(context: context)
         module.output = self
         return module.view
     }

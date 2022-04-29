@@ -10,9 +10,9 @@ import Managers
 import Settings
 import Swinject
 
-public final class AuthorizedZoneUserStoryAssembly {
-    public static func assemble(container: Container) {
-        AccountManagerAssembly.assemble(container: container)
-        ProfilesManagerAssembly.assembly(container: container)
+public final class AuthorizedZoneUserStoryAssembly: Assembly {
+    public init() { }
+    public func assemble(container: Container) {
+
     }
 }
