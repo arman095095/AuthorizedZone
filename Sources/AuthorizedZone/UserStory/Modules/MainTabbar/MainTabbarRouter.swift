@@ -22,6 +22,7 @@ protocol MainTabbarRouterInput: AnyObject {
 protocol MainTabbarRouterOutput: AnyObject {
     func logout()
     func recoverAccount()
+    func submodulesSetuped()
 }
 
 final class MainTabbarRouter {
@@ -57,6 +58,7 @@ extension MainTabbarRouter: MainTabbarRouterInput {
             viewController.tabBarItem.title = $0.title
             return viewController
         }
+        self.output?.submodulesSetuped()
     }
     
     func openAccountSettingsModule() {

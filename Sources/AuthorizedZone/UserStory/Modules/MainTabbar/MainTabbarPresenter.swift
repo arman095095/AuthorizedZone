@@ -29,6 +29,7 @@ final class MainTabbarPresenter {
     private let router: MainTabbarRouterInput
     private let interactor: MainTabbarInteractorInput
     private let alertManager: AlertManagerProtocol
+    private var submodulesConfigurated: Bool
     
     init(router: MainTabbarRouterInput,
          interactor: MainTabbarInteractorInput,
@@ -36,6 +37,7 @@ final class MainTabbarPresenter {
         self.router = router
         self.interactor = interactor
         self.alertManager = alertManager
+        self.submodulesConfigurated = false
     }
 }
 
@@ -52,8 +54,9 @@ extension MainTabbarPresenter: SubmodulesOutput {
 }
 
 extension MainTabbarPresenter: MainTabbarInteractorOutput {
+
     func successRecovered() {
-        
+        router.setupSubmodules(output: self)
     }
     
     func failureRecover(message: String) {
@@ -71,6 +74,7 @@ extension MainTabbarPresenter: MainTabbarInteractorOutput {
     }
     
     func successRefreshed() {
+        guard !submodulesConfigurated else { return }
         router.setupSubmodules(output: self)
     }
     
@@ -80,6 +84,10 @@ extension MainTabbarPresenter: MainTabbarInteractorOutput {
 }
 
 extension MainTabbarPresenter: MainTabbarRouterOutput {
+    func submodulesSetuped() {
+        submodulesConfigurated = true
+    }
+    
     func logout() {
         interactor.logout()
         output?.openUnauthorizedZone()
