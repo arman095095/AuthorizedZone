@@ -3,6 +3,27 @@
 
 import PackageDescription
 
+private let remoteDependencies: [Package.Dependency] = [
+    .package(url: "https://github.com/Swinject/Swinject.git", from: "2.8.0"),
+    .package(url: "https://github.com/arman095095/Managers.git", branch: "develop"),
+    .package(url: "https://github.com/arman095095/Module.git", branch: "develop"),
+    .package(url: "https://github.com/arman095095/DesignSystem.git", branch: "develop"),
+    .package(url: "https://github.com/arman095095/Settings.git", branch: "develop"),
+    .package(url: "https://github.com/arman095095/Profile.git", branch: "develop")
+]
+
+private let localDependencies: [Package.Dependency] = [
+    .package(url: "https://github.com/Swinject/Swinject.git", from: "2.8.0"),
+    .package(path: "/Users/armancarhcan/Desktop/Workdir/Managers"),
+    .package(path: "/Users/armancarhcan/Desktop/Workdir/Module"),
+    .package(path: "/Users/armancarhcan/Desktop/Workdir/DesignSystem"),
+    .package(path: "/Users/armancarhcan/Desktop/Workdir/Settings"),
+    .package(path: "/Users/armancarhcan/Desktop/Workdir/Profile")
+]
+
+let isDev = true
+private let dependencies = isDev ? localDependencies : remoteDependencies
+
 let package = Package(
     name: "AuthorizedZone",
     platforms: [.iOS(.v13)],
@@ -12,14 +33,7 @@ let package = Package(
             name: "AuthorizedZone",
             targets: ["AuthorizedZone"]),
     ],
-    dependencies: [
-        .package(url: "https://github.com/Swinject/Swinject.git", from: "2.8.0"),
-        .package(url: "https://github.com/arman095095/Managers.git", branch: "develop"),
-        .package(url: "https://github.com/arman095095/Module.git", branch: "develop"),
-        .package(url: "https://github.com/arman095095/DesignSystem.git", branch: "develop"),
-        .package(url: "https://github.com/arman095095/Settings.git", branch: "develop"),
-        .package(url: "https://github.com/arman095095/Profile.git", branch: "develop")
-    ],
+    dependencies: dependencies,
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
