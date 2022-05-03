@@ -10,8 +10,9 @@ import UIKit
 import Module
 import Profile
 import Settings
+import Posts
 
-typealias SubmodulesOutput = ProfileModuleOutput
+typealias SubmodulesOutput = ProfileModuleOutput & PostsModuleOutput
 
 protocol MainTabbarRouterInput: AnyObject {
     func setupTabbarItems(output: SubmodulesOutput)
@@ -49,10 +50,14 @@ extension MainTabbarRouter: MainTabbarRouterInput {
         transitionHandler?.viewControllers = UITabBarItem.ModuleType.allCases.map {
             var viewController: UIViewController
             switch $0 {
-            case .profile:
-                viewController = self.accountModule(output: output).view
-            default:
+            case .peoples:
                 viewController = UIViewController()
+            case .posts:
+                viewController = postsModule(output: output).view
+            case .chats:
+                viewController = UIViewController()
+            case .profile:
+                viewController = accountModule(output: output).view
             }
             viewController.tabBarItem.itemType = $0
             return viewController
@@ -69,6 +74,12 @@ extension MainTabbarRouter: MainTabbarRouterInput {
 private extension MainTabbarRouter {
     func accountModule(output: ProfileModuleOutput) -> ProfileModule {
         let module = routeMap.openCurrentAccountProfile()
+        module.output = output
+        return module
+    }
+    
+    func postsModule(output: PostsModuleOutput) -> PostsModule {
+        let module = routeMap.openPostsModule()
         module.output = output
         return module
     }

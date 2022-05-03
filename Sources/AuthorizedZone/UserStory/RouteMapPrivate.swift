@@ -8,9 +8,11 @@
 import Foundation
 import Settings
 import Profile
+import Posts
 
 protocol RouteMapPrivate {
     func mainTabbarModule(context: InputFlowContext) -> MainTabbarModule
     func openCurrentAccountProfile() -> ProfileModule
     func openAccountSettings() -> SettingsModule
+    func openPostsModule() -> PostsModule
 }

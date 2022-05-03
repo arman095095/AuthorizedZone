@@ -9,7 +9,8 @@ private let remoteDependencies: [Package.Dependency] = [
     .package(url: "https://github.com/arman095095/Module.git", branch: "develop"),
     .package(url: "https://github.com/arman095095/DesignSystem.git", branch: "develop"),
     .package(url: "https://github.com/arman095095/Settings.git", branch: "develop"),
-    .package(url: "https://github.com/arman095095/Profile.git", branch: "develop")
+    .package(url: "https://github.com/arman095095/Profile.git", branch: "develop"),
+    .package(url: "https://github.com/arman095095/Posts.git", branch: "develop")
 ]
 
 private let localDependencies: [Package.Dependency] = [
@@ -18,7 +19,8 @@ private let localDependencies: [Package.Dependency] = [
     .package(path: "/Users/armancarhcan/Desktop/Workdir/Module"),
     .package(path: "/Users/armancarhcan/Desktop/Workdir/DesignSystem"),
     .package(path: "/Users/armancarhcan/Desktop/Workdir/Settings"),
-    .package(path: "/Users/armancarhcan/Desktop/Workdir/Profile")
+    .package(path: "/Users/armancarhcan/Desktop/Workdir/Profile"),
+    .package(path: "/Users/armancarhcan/Desktop/Workdir/Posts")
 ]
 
 let isDev = true
@@ -44,6 +46,7 @@ let package = Package(
                            .product(name: "Managers", package: "Managers"),
                            .product(name: "Swinject", package: "Swinject"),
                            .product(name: "Settings", package: "Settings"),
-                           .product(name: "Profile", package: "Profile")]),
+                           .product(name: "Profile", package: "Profile"),
+                           .product(name: "Posts", package: "Posts")]),
     ]
 )

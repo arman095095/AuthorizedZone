@@ -12,6 +12,7 @@ import Managers
 import Profile
 import Settings
 import AlertManager
+import Posts
 
 public protocol AuthorizedZoneModuleProtocol: AnyObject {
     func rootModule(context: InputFlowContext) -> AuthorizedZoneModule
@@ -62,6 +63,10 @@ extension AuthorizedZoneUserStory: RouteMapPrivate {
         }
         let module = ProfileUserStory(container: container).currentAccountModule(profile: accountProfile)
         return module
+    }
+    
+    func openPostsModule() -> PostsModule {
+        return PostsUserStory(container: container).allPostsModule()
     }
 }
 
