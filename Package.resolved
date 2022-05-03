@@ -37,15 +37,6 @@
       }
     },
     {
-      "identity" : "designsystem",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/arman095095/DesignSystem.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "c5588e2cc7e060b93b34f60ba4e5242bb77ada14"
-      }
-    },
-    {
       "identity" : "firebase-ios-sdk",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk.git",
@@ -109,24 +100,6 @@
       }
     },
     {
-      "identity" : "managers",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/arman095095/Managers.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "fbf5359258c207c75ac3342e1bdb625b0bf30a6f"
-      }
-    },
-    {
-      "identity" : "module",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/arman095095/Module.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "98049b3f7a6d8667076fe53e650dadcd4f9ff8da"
-      }
-    },
-    {
       "identity" : "nanopb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/nanopb.git",
@@ -142,15 +115,6 @@
       "state" : {
         "branch" : "develop",
         "revision" : "ff40042f29d8e6c36a99c01fbf673fe47060e6e9"
-      }
-    },
-    {
-      "identity" : "profile",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/arman095095/Profile.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "762d9e3475863c91cac4f2c3eb46395e6a71d698"
       }
     },
     {
@@ -178,15 +142,6 @@
       "state" : {
         "branch" : "develop",
         "revision" : "a22f16e664421458f64c50dae628389f7c3086e4"
-      }
-    },
-    {
-      "identity" : "settings",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/arman095095/Settings.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "1af6d2e577a0c0c1e60536514d324cc4872b4120"
       }
     },
     {
