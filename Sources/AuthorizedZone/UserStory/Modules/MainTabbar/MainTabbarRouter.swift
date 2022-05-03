@@ -48,19 +48,21 @@ extension MainTabbarRouter: MainTabbarRouterInput {
     
     func setupTabbarItems(output: SubmodulesOutput) {
         transitionHandler?.viewControllers = UITabBarItem.ModuleType.allCases.map {
-            var viewController: UIViewController
+            var navigationController: UINavigationController
             switch $0 {
             case .peoples:
-                viewController = UIViewController()
+                navigationController = UINavigationController(rootViewController: UIViewController())
             case .posts:
-                viewController = postsModule(output: output).view
+                let view = postsModule(output: output).view
+                navigationController = UINavigationController(rootViewController: view)
             case .chats:
-                viewController = UIViewController()
+                navigationController = UINavigationController(rootViewController:UIViewController())
             case .profile:
-                viewController = accountModule(output: output).view
+                let view = accountModule(output: output).view
+                navigationController = UINavigationController(rootViewController: view)
             }
-            viewController.tabBarItem.itemType = $0
-            return viewController
+            navigationController.tabBarItem.itemType = $0
+            return navigationController
         }
         self.output?.tabbarItemsSetuped()
     }
