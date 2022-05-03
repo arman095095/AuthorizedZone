@@ -10,39 +10,12 @@
       }
     },
     {
-      "identity" : "account",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/arman095095/Account.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "d2d8f95eb92d59342c575990aa431793d3324f61"
-      }
-    },
-    {
-      "identity" : "alertmanager",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/arman095095/AlertManager.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "3f69738da56e9810f573ad9bca6b73df143ffc06"
-      }
-    },
-    {
       "identity" : "boringssl-swiftpm",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/boringssl-SwiftPM.git",
       "state" : {
         "revision" : "79db6516894a932d0ddaff3b05b9da1e4f6c4069",
         "version" : "0.9.0"
-      }
-    },
-    {
-      "identity" : "designsystem",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/arman095095/DesignSystem.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "687d7c82e83da24c308e35244fb50637d5539217"
       }
     },
     {
@@ -100,6 +73,15 @@
       }
     },
     {
+      "identity" : "inputbaraccessoryview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nathantannar4/InputBarAccessoryView.git",
+      "state" : {
+        "revision" : "2843b4454cfb6de5b4d1e5939fef2dd6257b69ee",
+        "version" : "5.5.0"
+      }
+    },
+    {
       "identity" : "leveldb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",
@@ -109,57 +91,12 @@
       }
     },
     {
-      "identity" : "managers",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/arman095095/Managers.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "314ce786de613da87398aef5688b230d26becbf5"
-      }
-    },
-    {
-      "identity" : "module",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/arman095095/Module.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "c57df1fc282f9f03dce067ec527aa10fa4cefbb6"
-      }
-    },
-    {
       "identity" : "nanopb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/nanopb.git",
       "state" : {
         "revision" : "7ee9ef9f627d85cbe1b8c4f49a3ed26eed216c77",
         "version" : "2.30908.0"
-      }
-    },
-    {
-      "identity" : "networkservices",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/arman095095/NetworkServices.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "58a3847604218e9df7c0bc1ea407f668ee2cfaa0"
-      }
-    },
-    {
-      "identity" : "posts",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/arman095095/Posts.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "af73c3ffc38aa1959668963c9e471d118d18c34d"
-      }
-    },
-    {
-      "identity" : "profile",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/arman095095/Profile.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "618ce1c7ef6a23f346ccb9b2beba7d2df9c7e9d9"
       }
     },
     {
@@ -178,24 +115,6 @@
       "state" : {
         "revision" : "2e63d0061da449ad0ed130768d05dceb1496de44",
         "version" : "5.12.5"
-      }
-    },
-    {
-      "identity" : "selection",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/arman095095/Selection.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "1e77f326fd6c2be05a38040101034bf4c9be7fe9"
-      }
-    },
-    {
-      "identity" : "settings",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/arman095095/Settings.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "6bd46afb21f71648abe2930e1fda74579c70d3a6"
       }
     },
     {
@@ -232,15 +151,6 @@
       "state" : {
         "revision" : "f10b6e9ebff440f985c43008f7c2d097639fcb81",
         "version" : "2.8.1"
-      }
-    },
-    {
-      "identity" : "utils",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/arman095095/Utils.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "461a97dee29828d933f13c4166bac18c6d74d058"
       }
     }
   ],
