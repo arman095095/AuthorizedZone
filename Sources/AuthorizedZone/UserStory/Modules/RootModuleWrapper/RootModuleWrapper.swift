@@ -10,7 +10,7 @@ import UIKit
 import Module
 import Managers
 import Profile
-import Settings
+import SettingsRouteMap
 
 public protocol AuthorizedZoneModuleInput: AnyObject {
     

@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import Settings
-import Profile
-import Posts
+import SettingsRouteMap
+import ProfileRouteMap
+import PostsRouteMap
 
 protocol RouteMapPrivate {
     func mainTabbarModule(context: InputFlowContext) -> MainTabbarModule

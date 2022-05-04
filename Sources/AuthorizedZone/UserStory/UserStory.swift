@@ -9,10 +9,11 @@ import Foundation
 import Module
 import Swinject
 import Managers
-import Profile
-import Settings
+import ProfileRouteMap
+import SettingsRouteMap
 import AlertManager
-import Posts
+import PostsRouteMap
+import UserStoryFacade
 
 public protocol AuthorizedZoneRouteMap: AnyObject {
     func rootModule(context: InputFlowContext) -> AuthorizedZoneModule
@@ -39,7 +40,9 @@ extension AuthorizedZoneUserStory: AuthorizedZoneRouteMap {
 extension AuthorizedZoneUserStory: RouteMapPrivate {
 
     func openAccountSettings() -> SettingsModule {
-        let module = SettingsUserStory(container: container).rootModule()
+        guard let module = container.synchronize().resolve(UserStoryFacade.self)?.settingsUserStory?.rootModule() else {
+            fatalError(ErrorMessage.dependency.localizedDescription)
+        }
         module.output = outputWrapper
         return module
     }
@@ -61,12 +64,17 @@ extension AuthorizedZoneUserStory: RouteMapPrivate {
         guard let accountProfile = container.synchronize().resolve(AccountModelProtocol.self)?.profile else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
-        let module = ProfileUserStory(container: container).currentAccountModule(profile: accountProfile)
+        guard let module = container.synchronize().resolve(UserStoryFacade.self)?.profileUserStory?.currentAccountModule(profile: accountProfile) else {
+            fatalError(ErrorMessage.dependency.localizedDescription)
+        }
         return module
     }
     
     func openPostsModule() -> PostsModule {
-        return PostsUserStory(container: container).allPostsModule()
+        guard let module = container.synchronize().resolve(UserStoryFacade.self)?.postsUserStory?.allPostsModule() else {
+            fatalError(ErrorMessage.dependency.localizedDescription)
+        }
+        return module
     }
 }
 

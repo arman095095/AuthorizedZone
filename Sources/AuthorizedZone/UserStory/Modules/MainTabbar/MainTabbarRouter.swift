@@ -8,9 +8,9 @@
 
 import UIKit
 import Module
-import Profile
-import Settings
-import Posts
+import ProfileRouteMap
+import SettingsRouteMap
+import PostsRouteMap
 
 typealias SubmodulesOutput = ProfileModuleOutput & PostsModuleOutput
 
@@ -48,21 +48,19 @@ extension MainTabbarRouter: MainTabbarRouterInput {
     
     func setupTabbarItems(output: SubmodulesOutput) {
         transitionHandler?.viewControllers = UITabBarItem.ModuleType.allCases.map {
-            var navigationController: UINavigationController
+            var viewController: UIViewController
             switch $0 {
             case .peoples:
-                navigationController = UINavigationController(rootViewController: UIViewController())
+                viewController = UIViewController()
             case .posts:
-                let view = postsModule(output: output).view
-                navigationController = UINavigationController(rootViewController: view)
+                viewController = postsModule(output: output).view
             case .chats:
-                navigationController = UINavigationController(rootViewController:UIViewController())
+                viewController = UIViewController()
             case .profile:
-                let view = accountModule(output: output).view
-                navigationController = UINavigationController(rootViewController: view)
+                viewController = accountModule(output: output).view
             }
-            navigationController.tabBarItem.itemType = $0
-            return navigationController
+            viewController.tabBarItem.itemType = $0
+            return viewController
         }
         self.output?.tabbarItemsSetuped()
     }

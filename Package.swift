@@ -20,7 +20,8 @@ private let localDependencies: [Package.Dependency] = [
     .package(path: "/Users/armancarhcan/Desktop/Workdir/DesignSystem"),
     .package(path: "/Users/armancarhcan/Desktop/Workdir/Settings"),
     .package(path: "/Users/armancarhcan/Desktop/Workdir/Profile"),
-    .package(path: "/Users/armancarhcan/Desktop/Workdir/Posts")
+    .package(path: "/Users/armancarhcan/Desktop/Workdir/Posts"),
+    .package(path: "/Users/armancarhcan/Desktop/Workdir/UserStoryFacade")
 ]
 
 let isDev = true
@@ -47,6 +48,7 @@ let package = Package(
                            .product(name: "Swinject", package: "Swinject"),
                            .product(name: "Settings", package: "Settings"),
                            .product(name: "Profile", package: "Profile"),
-                           .product(name: "Posts", package: "Posts")]),
+                           .product(name: "Posts", package: "Posts"),
+                           .product(name: "UserStoryFacade", package: "UserStoryFacade")]),
     ]
 )
