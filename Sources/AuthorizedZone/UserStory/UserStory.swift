@@ -8,17 +8,14 @@
 import Foundation
 import Module
 import Swinject
+import ModelInterfaces
 import Managers
 import ProfileRouteMap
 import SettingsRouteMap
 import AlertManager
 import PostsRouteMap
 import UserStoryFacade
-
-public protocol AuthorizedZoneRouteMap: AnyObject {
-    func rootModuleAfterAuthorization(account: AccountModelProtocol) -> AuthorizedZoneModule
-    func rootModuleAfterLaunch() -> AuthorizedZoneModule
-}
+import AuthorizedZoneRouteMap
 
 public final class AuthorizedZoneUserStory {
 
@@ -32,11 +29,11 @@ public final class AuthorizedZoneUserStory {
 
 extension AuthorizedZoneUserStory: AuthorizedZoneRouteMap {
 
-    func rootModuleAfterAuthorization(account: AccountModelProtocol) -> AuthorizedZoneModule {
+    public func rootModuleAfterAuthorization(account: AccountModelProtocol) -> AuthorizedZoneModule {
         rootModule(context: .afterAuthorization(account: account))
     }
 
-    func rootModuleAfterLaunch() -> AuthorizedZoneModule {
+    public func rootModuleAfterLaunch() -> AuthorizedZoneModule {
         rootModule(context: .afterLaunch)
     }
 }

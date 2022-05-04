@@ -8,6 +8,7 @@
 
 import UIKit
 import Managers
+import ModelInterfaces
 
 protocol MainTabbarInteractorInput: AnyObject {
     func updateAccount()

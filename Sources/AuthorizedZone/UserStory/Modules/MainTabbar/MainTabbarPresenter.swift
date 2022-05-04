@@ -8,8 +8,8 @@
 
 import UIKit
 import AlertManager
-import Managers
 import Module
+import ModelInterfaces
 
 protocol MainTabbarStringFactoryProtocol {
     var successRecoverMessage: String { get }

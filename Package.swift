@@ -10,7 +10,8 @@ private let remoteDependencies: [Package.Dependency] = [
     .package(url: "https://github.com/arman095095/DesignSystem.git", branch: "develop"),
     .package(url: "https://github.com/arman095095/Settings.git", branch: "develop"),
     .package(url: "https://github.com/arman095095/Profile.git", branch: "develop"),
-    .package(url: "https://github.com/arman095095/Posts.git", branch: "develop")
+    .package(url: "https://github.com/arman095095/Posts.git", branch: "develop"),
+    .package(url: "https://github.com/arman095095/AuthorizedZoneRouteMap.git", branch: "develop")
 ]
 
 private let localDependencies: [Package.Dependency] = [
@@ -21,7 +22,8 @@ private let localDependencies: [Package.Dependency] = [
     .package(path: "/Users/armancarhcan/Desktop/Workdir/Settings"),
     .package(path: "/Users/armancarhcan/Desktop/Workdir/Profile"),
     .package(path: "/Users/armancarhcan/Desktop/Workdir/Posts"),
-    .package(path: "/Users/armancarhcan/Desktop/Workdir/UserStoryFacade")
+    .package(path: "/Users/armancarhcan/Desktop/Workdir/UserStoryFacade"),
+    .package(path: "/Users/armancarhcan/Desktop/Workdir/AuthorizedZoneRouteMap")
 ]
 
 let isDev = true
@@ -49,6 +51,7 @@ let package = Package(
                            .product(name: "Settings", package: "Settings"),
                            .product(name: "Profile", package: "Profile"),
                            .product(name: "Posts", package: "Posts"),
-                           .product(name: "UserStoryFacade", package: "UserStoryFacade")]),
+                           .product(name: "UserStoryFacade", package: "UserStoryFacade"),
+                           .product(name: "AuthorizedZoneRouteMap", package: "AuthorizedZoneRouteMap")]),
     ]
 )

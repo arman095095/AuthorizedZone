@@ -9,8 +9,7 @@
 import UIKit
 import Module
 import Managers
-
-public typealias AuthorizedZoneModule = Module<AuthorizedZoneModuleInput, AuthorizedZoneModuleOutput>
+import AuthorizedZoneRouteMap
 
 enum RootModuleWrapperAssembly {
     static func makeModule(routeMap: RouteMapPrivate, context: InputFlowContext) -> AuthorizedZoneModule {

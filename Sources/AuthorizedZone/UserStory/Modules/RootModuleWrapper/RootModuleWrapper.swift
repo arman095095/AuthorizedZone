@@ -11,14 +11,7 @@ import Module
 import Managers
 import Profile
 import SettingsRouteMap
-
-public protocol AuthorizedZoneModuleInput: AnyObject {
-    
-}
-
-public protocol AuthorizedZoneModuleOutput: AnyObject {
-    func openAuthorization()
-}
+import AuthorizedZoneRouteMap
 
 final class RootModuleWrapper {
 
