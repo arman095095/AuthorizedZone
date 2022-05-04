@@ -16,7 +16,8 @@ import PostsRouteMap
 import UserStoryFacade
 
 public protocol AuthorizedZoneRouteMap: AnyObject {
-    func rootModule(context: InputFlowContext) -> AuthorizedZoneModule
+    func rootModuleAfterAuthorization(account: AccountModelProtocol) -> AuthorizedZoneModule
+    func rootModuleAfterLaunch() -> AuthorizedZoneModule
 }
 
 public final class AuthorizedZoneUserStory {
@@ -30,14 +31,23 @@ public final class AuthorizedZoneUserStory {
 }
 
 extension AuthorizedZoneUserStory: AuthorizedZoneRouteMap {
-    public func rootModule(context: InputFlowContext) -> AuthorizedZoneModule {
-        let module = RootModuleWrapperAssembly.makeModule(routeMap: self, context: context)
-        outputWrapper = module.input as? RootModuleWrapper
-        return module
+
+    func rootModuleAfterAuthorization(account: AccountModelProtocol) -> AuthorizedZoneModule {
+        rootModule(context: .afterAuthorization(account: account))
+    }
+
+    func rootModuleAfterLaunch() -> AuthorizedZoneModule {
+        rootModule(context: .afterLaunch)
     }
 }
 
 extension AuthorizedZoneUserStory: RouteMapPrivate {
+    
+    func rootModule(context: InputFlowContext) -> AuthorizedZoneModule {
+        let module = RootModuleWrapperAssembly.makeModule(routeMap: self, context: context)
+        outputWrapper = module.input as? RootModuleWrapper
+        return module
+    }
 
     func openAccountSettings() -> SettingsModule {
         guard let module = container.synchronize().resolve(UserStoryFacade.self)?.settingsUserStory?.rootModule() else {
