@@ -14,7 +14,7 @@ import Settings
 import AlertManager
 import Posts
 
-public protocol AuthorizedZoneModuleProtocol: AnyObject {
+public protocol AuthorizedZoneRouteMap: AnyObject {
     func rootModule(context: InputFlowContext) -> AuthorizedZoneModule
 }
 
@@ -28,7 +28,7 @@ public final class AuthorizedZoneUserStory {
     }
 }
 
-extension AuthorizedZoneUserStory: AuthorizedZoneModuleProtocol {
+extension AuthorizedZoneUserStory: AuthorizedZoneRouteMap {
     public func rootModule(context: InputFlowContext) -> AuthorizedZoneModule {
         let module = RootModuleWrapperAssembly.makeModule(routeMap: self, context: context)
         outputWrapper = module.input as? RootModuleWrapper
