@@ -6,12 +6,7 @@
 //
 
 import Foundation
-import Managers
-import Settings
 import Swinject
-import UserStoryFacade
-import Posts
-import Profile
 import AuthorizedZoneRouteMap
 
 public final class AuthorizedZoneUserStoryAssembly: Assembly {

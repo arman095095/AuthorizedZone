@@ -9,7 +9,7 @@
 import UIKit
 import Module
 import Managers
-import Profile
+import ProfileRouteMap
 import SettingsRouteMap
 import AuthorizedZoneRouteMap
 
