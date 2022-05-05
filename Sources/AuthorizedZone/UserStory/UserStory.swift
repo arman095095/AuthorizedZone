@@ -47,7 +47,7 @@ extension AuthorizedZoneUserStory: RouteMapPrivate {
     }
 
     func openAccountSettings() -> SettingsModule {
-        guard let module = container.synchronize().resolve(UserStoryFacade.self)?.settingsUserStory?.rootModule() else {
+        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.settingsUserStory?.rootModule() else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
         module.output = outputWrapper
@@ -71,14 +71,14 @@ extension AuthorizedZoneUserStory: RouteMapPrivate {
         guard let accountProfile = container.synchronize().resolve(AccountModelProtocol.self)?.profile else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
-        guard let module = container.synchronize().resolve(UserStoryFacade.self)?.profileUserStory?.currentAccountModule(profile: accountProfile) else {
+        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.profileUserStory?.currentAccountModule(profile: accountProfile) else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
         return module
     }
     
     func openPostsModule() -> PostsModule {
-        guard let module = container.synchronize().resolve(UserStoryFacade.self)?.postsUserStory?.allPostsModule() else {
+        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.postsUserStory?.allPostsModule() else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
         return module
