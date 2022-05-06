@@ -15,5 +15,5 @@ protocol RouteMapPrivate {
     func openCurrentAccountProfile() -> ProfileModule
     func openAccountSettings() -> SettingsModule
     func openPostsModule() -> PostsModule
-    func profilesSendOffersModule() -> ProfileModule
+    //func profilesSendOffersModule() -> ProfileModule
 }

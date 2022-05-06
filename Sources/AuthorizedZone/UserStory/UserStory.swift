@@ -39,13 +39,6 @@ extension AuthorizedZoneUserStory: AuthorizedZoneRouteMap {
 }
 
 extension AuthorizedZoneUserStory: RouteMapPrivate {
-
-    func profilesSendOffersModule() -> ProfileModule {
-        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.profileUserStory?.offersSendingProfilesList() else {
-            fatalError(ErrorMessage.dependency.localizedDescription)
-        }
-        return module
-    }
     
     func rootModule(context: InputFlowContext) -> AuthorizedZoneModule {
         let module = RootModuleWrapperAssembly.makeModule(routeMap: self, context: context)
@@ -78,7 +71,7 @@ extension AuthorizedZoneUserStory: RouteMapPrivate {
         guard let accountProfile = container.synchronize().resolve(AccountModelProtocol.self)?.profile else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
-        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.profileUserStory?.currentAccountModule(profile: accountProfile) else {
+        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.profileUserStory?.rootAccountModule(profile: accountProfile) else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
         return module

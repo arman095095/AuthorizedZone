@@ -51,7 +51,7 @@ extension MainTabbarRouter: MainTabbarRouterInput {
             var viewController: UIViewController
             switch $0 {
             case .peoples:
-                viewController = profilesSendOffersModule(output: output).view
+                viewController = UIViewController()
             case .posts:
                 viewController = postsModule(output: output).view
             case .chats:
@@ -72,11 +72,6 @@ extension MainTabbarRouter: MainTabbarRouterInput {
 }
 
 private extension MainTabbarRouter {
-    func profilesSendOffersModule(output: ProfileModuleOutput) -> ProfileModule {
-        let module = routeMap.profilesSendOffersModule()
-        module.output = output
-        return module
-    }
     
     func accountModule(output: ProfileModuleOutput) -> ProfileModule {
         let module = routeMap.openCurrentAccountProfile()
