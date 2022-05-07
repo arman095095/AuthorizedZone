@@ -12,8 +12,6 @@ import ProfileRouteMap
 import SettingsRouteMap
 import PostsRouteMap
 
-typealias SubmodulesOutput = ProfileModuleOutput & PostsModuleOutput
-
 protocol MainTabbarRouterInput: AnyObject {
     func setupTabbarItems(output: MainTabbarModuleOutput)
     func openRecoverAlert()
