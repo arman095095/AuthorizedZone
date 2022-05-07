@@ -68,12 +68,6 @@ extension MainTabbarPresenter: MainTabbarViewOutput {
     }
 }
 
-extension MainTabbarPresenter: SubmodulesOutput {
-    func openAccountSettingsModule() {
-        router.openAccountSettingsModule()
-    }
-}
-
 extension MainTabbarPresenter: MainTabbarInteractorOutput {
 
     func successRecovered() {
@@ -126,7 +120,8 @@ extension MainTabbarPresenter: MainTabbarModuleInput {
 
 private extension MainTabbarPresenter {
     func configureSubmodulesAndContext() {
-        router.setupTabbarItems(output: self)
+        guard let output = output else { return }
+        router.setupTabbarItems(output: output)
         switch context {
         case .afterAuthorization:
             self.context = .afterLaunch

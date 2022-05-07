@@ -15,9 +15,8 @@ import PostsRouteMap
 typealias SubmodulesOutput = ProfileModuleOutput & PostsModuleOutput
 
 protocol MainTabbarRouterInput: AnyObject {
-    func setupTabbarItems(output: SubmodulesOutput)
+    func setupTabbarItems(output: MainTabbarModuleOutput)
     func openRecoverAlert()
-    func openAccountSettingsModule()
 }
 
 protocol MainTabbarRouterOutput: AnyObject {
@@ -46,7 +45,7 @@ extension MainTabbarRouter: MainTabbarRouterInput {
         })
     }
     
-    func setupTabbarItems(output: SubmodulesOutput) {
+    func setupTabbarItems(output: MainTabbarModuleOutput) {
         transitionHandler?.viewControllers = UITabBarItem.ModuleType.allCases.map {
             var viewController: UIViewController
             switch $0 {
@@ -64,24 +63,19 @@ extension MainTabbarRouter: MainTabbarRouterInput {
         }
         self.output?.tabbarItemsSetuped()
     }
-    
-    func openAccountSettingsModule() {
-        let module = routeMap.openAccountSettings()
-        transitionHandler?.navigationController?.pushViewController(module.view, animated: true)
-    }
 }
 
 private extension MainTabbarRouter {
     
-    func accountModule(output: ProfileModuleOutput) -> ProfileModule {
+    func accountModule(output: MainTabbarModuleOutput) -> ProfileModule {
         let module = routeMap.openCurrentAccountProfile()
-        module.output = output
+        module.output = output as? ProfileModuleOutput
         return module
     }
     
-    func postsModule(output: PostsModuleOutput) -> PostsModule {
+    func postsModule(output: MainTabbarModuleOutput) -> PostsModule {
         let module = routeMap.openPostsModule()
-        module.output = output
+        module.output = output as? PostsModuleOutput
         return module
     }
 }
