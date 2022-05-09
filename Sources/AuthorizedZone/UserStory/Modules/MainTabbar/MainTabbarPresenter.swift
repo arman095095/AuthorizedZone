@@ -73,10 +73,12 @@ extension MainTabbarPresenter: MainTabbarInteractorOutput {
     func successRecovered() {
         alertManager.present(type: .success, title: stringFactory.successRecoverMessage)
         configureSubmodulesAndContext()
+        interactor.observeAccount()
     }
     
     func successRefreshed() {
         configureSubmodulesAndContext()
+        interactor.observeAccount()
     }
     
     func profileRemoved() {

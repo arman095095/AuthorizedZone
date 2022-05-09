@@ -14,6 +14,7 @@ protocol MainTabbarInteractorInput: AnyObject {
     func updateAccount()
     func saveAccount(account: AccountModelProtocol)
     func recoverProfile()
+    func observeAccount()
     func logout()
 }
 
@@ -56,7 +57,6 @@ extension MainTabbarInteractor: MainTabbarInteractorInput {
     
     func updateAccount() {
         accountManager.processAccountAfterLaunch { [weak self] result in
-            defer { self?.observeAccount() }
             switch result {
             case .success:
                 self?.output?.successRefreshed()
@@ -68,7 +68,6 @@ extension MainTabbarInteractor: MainTabbarInteractorInput {
     
     func saveAccount(account: AccountModelProtocol) {
         accountManager.processAccountAfterSuccessAuthorization(account: account) { [weak self] result in
-            defer { self?.observeAccount() }
             switch result {
             case .success:
                 self?.output?.successRefreshed()
@@ -77,16 +76,16 @@ extension MainTabbarInteractor: MainTabbarInteractorInput {
             }
         }
     }
-}
-
-private extension MainTabbarInteractor {
-
+    
     func observeAccount() {
         accountManager.observeAccountChanges { [weak self] removed in
             guard removed else { return }
             self?.output?.logout()
         }
     }
+}
+
+private extension MainTabbarInteractor {
 
     func handle(profileError: AccountManagerError.Profile) {
         switch profileError {
