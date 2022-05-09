@@ -13,6 +13,7 @@ import ProfileRouteMap
 import SettingsRouteMap
 import AuthorizedZoneRouteMap
 import PostsRouteMap
+import ChatsRouteMap
 
 final class RootModuleWrapper {
 
@@ -37,6 +38,8 @@ extension RootModuleWrapper: MainTabbarModuleOutput { }
 extension RootModuleWrapper: ProfileModuleOutput { }
 
 extension RootModuleWrapper: PostsModuleOutput { }
+
+extension RootModuleWrapper: ChatsModuleOutput { }
 
 extension RootModuleWrapper: SettingsModuleOutput {
     func openUnauthorizedZone() {
