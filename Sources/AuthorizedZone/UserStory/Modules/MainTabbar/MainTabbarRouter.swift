@@ -11,6 +11,7 @@ import Module
 import ProfileRouteMap
 import SettingsRouteMap
 import PostsRouteMap
+import ChatsRouteMap
 
 protocol MainTabbarRouterInput: AnyObject {
     func setupTabbarItems(output: MainTabbarModuleOutput)
@@ -52,7 +53,7 @@ extension MainTabbarRouter: MainTabbarRouterInput {
             case .posts:
                 viewController = postsModule(output: output).view
             case .chats:
-                viewController = UIViewController()
+                viewController = chatsModule(output: output).view
             case .profile:
                 viewController = accountModule(output: output).view
             }
@@ -74,6 +75,12 @@ private extension MainTabbarRouter {
     func postsModule(output: MainTabbarModuleOutput) -> PostsModule {
         let module = routeMap.openPostsModule()
         module.output = output as? PostsModuleOutput
+        return module
+    }
+    
+    func chatsModule(output: MainTabbarModuleOutput) -> ChatsModule {
+        let module = routeMap.openChatsModule()
+        module.output = output as? ChatsModuleOutput
         return module
     }
 }

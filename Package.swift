@@ -11,6 +11,7 @@ private let dependencies: [Package.Dependency] = [
     .package(url: "https://github.com/arman095095/SettingsRouteMap.git", branch: "develop"),
     .package(url: "https://github.com/arman095095/ProfileRouteMap.git", branch: "develop"),
     .package(url: "https://github.com/arman095095/PostsRouteMap.git", branch: "develop"),
+    .package(url: "https://github.com/arman095095/ChatsRouteMap.git", branch: "develop"),
     .package(url: "https://github.com/arman095095/AuthorizedZoneRouteMap.git", branch: "develop"),
     .package(url: "https://github.com/arman095095/UserStoryFacade.git", branch: "develop"),
     .package(url: "https://github.com/arman095095/AlertManager.git", branch: "develop")
@@ -40,6 +41,7 @@ let package = Package(
                            .product(name: "PostsRouteMap", package: "PostsRouteMap"),
                            .product(name: "UserStoryFacade", package: "UserStoryFacade"),
                            .product(name: "AuthorizedZoneRouteMap", package: "AuthorizedZoneRouteMap"),
-                           .product(name: "AlertManager", package: "AlertManager")]),
+                           .product(name: "AlertManager", package: "AlertManager"),
+                           .product(name: "ChatsRouteMap", package: "ChatsRouteMap")]),
     ]
 )

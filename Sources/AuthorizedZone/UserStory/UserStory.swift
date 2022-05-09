@@ -16,6 +16,7 @@ import AlertManager
 import PostsRouteMap
 import UserStoryFacade
 import AuthorizedZoneRouteMap
+import ChatsRouteMap
 
 public final class AuthorizedZoneUserStory {
 
@@ -43,6 +44,14 @@ extension AuthorizedZoneUserStory: RouteMapPrivate {
     func rootModule(context: InputFlowContext) -> AuthorizedZoneModule {
         let module = RootModuleWrapperAssembly.makeModule(routeMap: self, context: context)
         outputWrapper = module.input as? RootModuleWrapper
+        return module
+    }
+    
+    func openChatsModule() -> ChatsModule {
+        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.chatsUserStory?.rootModule() else {
+            fatalError(ErrorMessage.dependency.localizedDescription)
+        }
+        module.output = outputWrapper
         return module
     }
 

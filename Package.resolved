@@ -55,6 +55,15 @@
       }
     },
     {
+      "identity" : "chatsroutemap",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/arman095095/ChatsRouteMap.git",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "77b218cef7e9eab46dfd5ab3f285eeec76fa4899"
+      }
+    },
+    {
       "identity" : "designsystem",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/arman095095/DesignSystem.git",
