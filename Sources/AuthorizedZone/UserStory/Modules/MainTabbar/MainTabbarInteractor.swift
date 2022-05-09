@@ -84,7 +84,7 @@ private extension MainTabbarInteractor {
     func observeAccount() {
         accountManager.observeAccountChanges { [weak self] removed in
             guard removed else { return }
-            output?.logout()
+            self?.output?.logout()
         }
     }
 
