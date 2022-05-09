@@ -55,8 +55,8 @@ extension MainTabbarInteractor: MainTabbarInteractorInput {
     }
     
     func updateAccount() {
-        observeAccount()
         accountManager.processAccountAfterLaunch { [weak self] result in
+            defer { self?.observeAccount() }
             switch result {
             case .success:
                 self?.output?.successRefreshed()
@@ -67,8 +67,8 @@ extension MainTabbarInteractor: MainTabbarInteractorInput {
     }
     
     func saveAccount(account: AccountModelProtocol) {
-        observeAccount()
         accountManager.processAccountAfterSuccessAuthorization(account: account) { [weak self] result in
+            defer { self?.observeAccount() }
             switch result {
             case .success:
                 self?.output?.successRefreshed()
