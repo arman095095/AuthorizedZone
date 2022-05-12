@@ -9,6 +9,7 @@ import Foundation
 import Swinject
 import NetworkServices
 import Services
+import Managers
 
 public final class AccountManagerAssembly: Assembly {
     
@@ -34,6 +35,6 @@ public final class AccountManagerAssembly: Assembly {
                                   profileService: profileService,
                                   cacheService: cacheService,
                                   container: container)
-        }.implements(ProfileInfoManagerProtocol.self, name: ProfileInfoManagersName.account.rawValue).inObjectScope(.weak)
+        }.inObjectScope(.weak)
     }
 }
