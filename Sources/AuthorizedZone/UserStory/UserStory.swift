@@ -48,7 +48,7 @@ extension AuthorizedZoneUserStory: RouteMapPrivate {
     }
     
     func openChatsModule() -> ChatsModule {
-        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.chatsUserStory?.rootModule() else {
+        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.chatsUserStory?.chatsAndRequestsModule() else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
         module.output = outputWrapper
