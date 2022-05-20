@@ -30,21 +30,21 @@ public enum AccountManagerContext {
 final class AccountManager {
     private var account: AccountModelProtocol?
     private let accountID: String
-    private let accountService: AccountServiceProtocol
-    private let accountInfoService: AccountInfoNetworkServiceProtocol
+    private let accountService: AccountNetworkServiceProtocol
+    private let accountInfoService: AccountContentNetworkServiceProtocol
     private let remoteStorageService: ProfileRemoteStorageServiceProtocol
-    private let profileService: ProfilesServiceProtocol
+    private let profileService: ProfilesNetworkServiceProtocol
     private let container: Container
     private let quickAccessManager: QuickAccessManagerProtocol
     private let cacheService: AccountCacheServiceProtocol
     private var socket: SocketProtocol?
     
     init(accountID: String,
-         accountService: AccountServiceProtocol,
-         accountInfoService: AccountInfoNetworkServiceProtocol,
+         accountService: AccountNetworkServiceProtocol,
+         accountInfoService: AccountContentNetworkServiceProtocol,
          remoteStorage: ProfileRemoteStorageServiceProtocol,
          quickAccessManager: QuickAccessManagerProtocol,
-         profileService: ProfilesServiceProtocol,
+         profileService: ProfilesNetworkServiceProtocol,
          cacheService: AccountCacheServiceProtocol,
          container: Container) {
         self.accountService = accountService
