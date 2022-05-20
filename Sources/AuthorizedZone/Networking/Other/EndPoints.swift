@@ -7,6 +7,15 @@
 
 import Foundation
 
+enum URLComponents {
+    enum Paths: String {
+        case users
+        case sendedRequests
+        case friendIDs
+        case waitingUsers
+    }
+}
+
 struct ProfileURLComponents {
 
     enum Paths: String {

@@ -116,7 +116,7 @@ extension AccountManager: AccountManagerProtocol {
             case .success:
                 self.account?.profile.removed = false
                 self.cacheService.store(accountModel: currentAccount)
-                self.accountService.setOnline(accountID: self.accountID)
+                self.setOnline()
                 completion(.success(()))
             case .failure:
                 completion(.failure(.cantRecover))
