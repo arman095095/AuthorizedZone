@@ -48,7 +48,7 @@ extension AuthorizedZoneUserStory: RouteMapPrivate {
     }
     
     func openChatsModule() -> ChatsModule {
-        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.chatsUserStory?.chatsAndRequestsModule() else {
+        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.chats?.chatsAndRequestsModule() else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
         module.output = outputWrapper
@@ -56,7 +56,7 @@ extension AuthorizedZoneUserStory: RouteMapPrivate {
     }
 
     func openAccountSettings() -> SettingsModule {
-        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.settingsUserStory?.rootModule() else {
+        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.settings?.rootModule() else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
         module.output = outputWrapper
@@ -80,14 +80,14 @@ extension AuthorizedZoneUserStory: RouteMapPrivate {
         guard let accountProfile = container.synchronize().resolve(AccountModelProtocol.self)?.profile else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
-        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.profileUserStory?.rootAccountModule(profile: accountProfile) else {
+        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.profile?.rootAccountModule(profile: accountProfile) else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
         return module
     }
     
     func openPostsModule() -> PostsModule {
-        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.postsUserStory?.allPostsModule() else {
+        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.posts?.allPostsModule() else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
         return module
