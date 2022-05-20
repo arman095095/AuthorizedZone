@@ -12,6 +12,7 @@ import AuthorizedZoneRouteMap
 public final class AuthorizedZoneUserStoryAssembly: Assembly {
     public init() { }
     public func assemble(container: Container) {
+        AccountManagerAssembly().assemble(container: container)
         container.register(AuthorizedZoneRouteMap.self) { r in
             AuthorizedZoneUserStory(container: container)
         }

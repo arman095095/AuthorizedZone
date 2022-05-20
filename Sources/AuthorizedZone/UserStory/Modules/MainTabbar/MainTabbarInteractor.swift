@@ -98,12 +98,10 @@ private extension MainTabbarInteractor {
         }
     }
     
-    func handle(recoverError: AccountManagerError.Remove) {
+    func handle(recoverError: AccountManagerError.Recover) {
         switch recoverError {
         case .cantRecover:
             output?.failureRecover(message: recoverError.localizedDescription)
-        default:
-            output?.profileEmpty(message: recoverError.localizedDescription)
         }
     }
 }
