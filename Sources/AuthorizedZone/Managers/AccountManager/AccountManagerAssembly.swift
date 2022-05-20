@@ -16,9 +16,8 @@ final class AccountManagerAssembly: Assembly {
     func assemble(container: Container) {
         container.register(AccountManagerProtocol.self) { r in
             guard let accountService = r.resolve(AccountNetworkServiceProtocol.self),
-                  let remoteStorage = r.resolve(ProfileRemoteStorageServiceProtocol.self),
                   let quickAccessManager = r.resolve(QuickAccessManagerProtocol.self),
-                  let profileService = r.resolve(ProfilesNetworkServiceProtocol.self),
+                  let profileService = r.resolve(ProfileInfoNetworkServiceProtocol.self),
                   let accountInfoService = r.resolve(AccountContentNetworkServiceProtocol.self),
                   let cacheService = r.resolve(AccountCacheServiceProtocol.self),
                   let accountID = quickAccessManager.userID else { fatalError(ErrorMessage.dependency.localizedDescription)
@@ -26,7 +25,6 @@ final class AccountManagerAssembly: Assembly {
             return AccountManager(accountID: accountID,
                                   accountService: accountService,
                                   accountInfoService: accountInfoService,
-                                  remoteStorage: remoteStorage,
                                   quickAccessManager: quickAccessManager,
                                   profileService: profileService,
                                   cacheService: cacheService,

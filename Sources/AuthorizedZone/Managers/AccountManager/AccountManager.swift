@@ -32,8 +32,7 @@ final class AccountManager {
     private let accountID: String
     private let accountService: AccountNetworkServiceProtocol
     private let accountInfoService: AccountContentNetworkServiceProtocol
-    private let remoteStorageService: ProfileRemoteStorageServiceProtocol
-    private let profileService: ProfilesNetworkServiceProtocol
+    private let profileService: ProfileInfoNetworkServiceProtocol
     private let container: Container
     private let quickAccessManager: QuickAccessManagerProtocol
     private let cacheService: AccountCacheServiceProtocol
@@ -42,14 +41,12 @@ final class AccountManager {
     init(accountID: String,
          accountService: AccountNetworkServiceProtocol,
          accountInfoService: AccountContentNetworkServiceProtocol,
-         remoteStorage: ProfileRemoteStorageServiceProtocol,
          quickAccessManager: QuickAccessManagerProtocol,
-         profileService: ProfilesNetworkServiceProtocol,
+         profileService: ProfileInfoNetworkServiceProtocol,
          cacheService: AccountCacheServiceProtocol,
          container: Container) {
         self.accountService = accountService
         self.accountInfoService = accountInfoService
-        self.remoteStorageService = remoteStorage
         self.quickAccessManager = quickAccessManager
         self.profileService = profileService
         self.cacheService = cacheService
