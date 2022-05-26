@@ -12,6 +12,7 @@ protocol AccountContentNetworkServiceProtocol {
     func friendIDs(userID: String, completion: @escaping (Result<[String], Error>) -> ())
     func waitingIDs(userID: String, completion: @escaping (Result<[String], Error>) -> ())
     func requestIDs(userID: String, completion: @escaping (Result<[String], Error>) -> ())
+    func getBlockedIds(userID: String, completion: @escaping (Result<[String],Error>) -> Void)
 }
 
 final class AccountContentNetworkService {
@@ -61,6 +62,23 @@ extension AccountContentNetworkService: AccountContentNetworkServiceProtocol {
             }
             guard let query = query else { return }
             completion(.success(query.documents.map { $0.documentID }))
+        }
+    }
+    
+    public func getBlockedIds(userID: String, completion: @escaping (Result<[String], Error>) -> Void) {
+        var ids: [String] = []
+        usersRef.document(userID).collection(ProfileURLComponents.Paths.blocked.rawValue).getDocuments { (query, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            guard let query = query else { return }
+            query.documents.forEach { doc in
+                if let id = doc.data()[ProfileURLComponents.Parameters.id.rawValue] as? String {
+                    ids.append(id)
+                }
+            }
+            completion(.success(ids))
         }
     }
 }

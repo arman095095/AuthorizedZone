@@ -159,7 +159,7 @@ private extension AccountManager {
             }
         }
         group.enter()
-        accountService.getBlockedIds(accountID: accountID) { result in
+        accountInfoService.getBlockedIds(userID: accountID) { result in
             defer { group.leave() }
             switch result {
             case .success(let ids):

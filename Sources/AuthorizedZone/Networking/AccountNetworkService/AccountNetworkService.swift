@@ -16,8 +16,6 @@ protocol AccountNetworkServiceProtocol {
     func setOffline(accountID: String)
     func recoverAccount(accountID: String,
                         completion: @escaping (Result<Void, Error>) -> Void)
-    func getBlockedIds(accountID: String,
-                       completion: @escaping (Result<[String],Error>) -> Void)
     
 }
 
@@ -38,23 +36,6 @@ final class AccountNetworkService {
 }
 
 extension AccountNetworkService: AccountNetworkServiceProtocol {
-    
-    public func getBlockedIds(accountID: String, completion: @escaping (Result<[String], Error>) -> Void) {
-        var ids: [String] = []
-        usersRef.document(accountID).collection(ProfileURLComponents.Paths.blocked.rawValue).getDocuments { (query, error) in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            guard let query = query else { return }
-            query.documents.forEach { doc in
-                if let id = doc.data()[ProfileURLComponents.Parameters.id.rawValue] as? String {
-                    ids.append(id)
-                }
-            }
-            completion(.success(ids))
-        }
-    }
     
     public func setOnline(accountID: String) {
         usersRef.document(accountID).updateData([ProfileURLComponents.Parameters.online.rawValue: true])
