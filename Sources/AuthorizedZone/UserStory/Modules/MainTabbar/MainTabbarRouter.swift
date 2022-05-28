@@ -50,7 +50,7 @@ extension MainTabbarRouter: MainTabbarRouterInput {
             var viewController: UIViewController
             switch $0 {
             case .peoples:
-                viewController = UIViewController()
+                viewController = profilesListModule().view
             case .posts:
                 viewController = postsModule(output: output).view
             case .chats:
