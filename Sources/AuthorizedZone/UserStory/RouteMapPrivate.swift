@@ -10,6 +10,7 @@ import SettingsRouteMap
 import ProfileRouteMap
 import PostsRouteMap
 import ChatsRouteMap
+import ProfilesListRouteMap
 
 protocol RouteMapPrivate {
     func mainTabbarModule(context: InputFlowContext) -> MainTabbarModule
@@ -17,5 +18,5 @@ protocol RouteMapPrivate {
     func openAccountSettings() -> SettingsModule
     func openPostsModule() -> PostsModule
     func openChatsModule() -> ChatsModule
-    //func profilesSendOffersModule() -> ProfileModule
+    func openProfilesListModule() -> ProfilesListModule
 }

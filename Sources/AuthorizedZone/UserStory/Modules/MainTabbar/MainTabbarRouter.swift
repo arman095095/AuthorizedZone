@@ -12,6 +12,7 @@ import ProfileRouteMap
 import SettingsRouteMap
 import PostsRouteMap
 import ChatsRouteMap
+import ProfilesListRouteMap
 
 protocol MainTabbarRouterInput: AnyObject {
     func setupTabbarItems(output: MainTabbarModuleOutput)
@@ -65,6 +66,10 @@ extension MainTabbarRouter: MainTabbarRouterInput {
 }
 
 private extension MainTabbarRouter {
+    
+    func profilesListModule() -> ProfilesListModule {
+        routeMap.openProfilesListModule()
+    }
     
     func accountModule(output: MainTabbarModuleOutput) -> ProfileModule {
         let module = routeMap.openCurrentAccountProfile()

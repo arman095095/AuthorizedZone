@@ -17,6 +17,7 @@ import PostsRouteMap
 import UserStoryFacade
 import AuthorizedZoneRouteMap
 import ChatsRouteMap
+import ProfilesListRouteMap
 
 public final class AuthorizedZoneUserStory {
 
@@ -88,6 +89,13 @@ extension AuthorizedZoneUserStory: RouteMapPrivate {
     
     func openPostsModule() -> PostsModule {
         guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.posts?.allPostsModule() else {
+            fatalError(ErrorMessage.dependency.localizedDescription)
+        }
+        return module
+    }
+    
+    func openProfilesListModule() -> ProfilesListModule {
+        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.profilesList?.rootModule() else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
         return module
