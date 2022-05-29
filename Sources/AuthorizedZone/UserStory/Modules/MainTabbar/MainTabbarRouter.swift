@@ -55,12 +55,14 @@ extension MainTabbarRouter: MainTabbarRouterInput {
                 viewController = postsModule(output: output).view
             case .chats:
                 viewController = chatsModule(output: output).view
+                let _ = viewController.view
             case .profile:
                 viewController = accountModule(output: output).view
             }
             viewController.tabBarItem.itemType = $0
             return viewController
         }
+        transitionHandler?.selectedIndex = UITabBarItem.ModuleType.peoples.rawValue
         self.output?.tabbarItemsSetuped()
     }
 }
@@ -91,11 +93,24 @@ private extension MainTabbarRouter {
 }
 
 extension UITabBarItem {
-    enum ModuleType: String, CaseIterable {
-        case peoples = "Знакомства"
-        case posts = "Лента"
-        case chats = "Чаты"
-        case profile = "Профиль"
+    enum ModuleType: Int, CaseIterable {
+        case peoples
+        case posts
+        case chats
+        case profile
+        
+        var title: String {
+            switch self {
+            case .peoples:
+                 return "Знакомства"
+            case .posts:
+                return "Лента"
+            case .chats:
+                return "Чаты"
+            case .profile:
+                return "Профиль"
+            }
+        }
         
         var imageName: String {
             switch self {
@@ -115,12 +130,21 @@ extension UITabBarItem {
         set {
             guard let type = newValue else { return }
             image = UIImage(systemName: type.imageName)
-            title = type.rawValue
+            title = type.title
         }
-        
         get {
-            guard let title = title else { return nil }
-            return ModuleType(rawValue: title)
+            switch title {
+            case ModuleType.peoples.title:
+                return .peoples
+            case ModuleType.profile.title:
+                return .profile
+            case ModuleType.chats.title:
+                return .chats
+            case ModuleType.posts.title:
+                return .posts
+            default:
+                return nil
+            }
         }
     }
 }

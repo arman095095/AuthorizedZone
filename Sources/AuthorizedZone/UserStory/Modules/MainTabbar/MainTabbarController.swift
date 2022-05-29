@@ -41,13 +41,6 @@ private extension MainTabbarController {
         tabBar.tintColor = #colorLiteral(red: 0.7772225649, green: 0.1716628475, blue: 1, alpha: 1)
         tabBarItem.setTitleTextAttributes(Constants.atributesFont, for: .normal)
     }
-
-    
-    /*func setupBadges() {
-        if let chatsItem = tabBar.items?.first(where: { $0.title == self.mainTabBarViewModel.communicationTitle }) {
-            chatsItem.badgeValue = self.mainTabBarViewModel.badgeValueForChats
-        }
-    }*/
 }
 
 extension MainTabbarController: MainTabbarViewInput { }
