@@ -13,6 +13,7 @@ public final class AuthorizedZoneUserStoryAssembly: Assembly {
     public init() { }
     public func assemble(container: Container) {
         AccountCacheServiceAssembly().assemble(container: container)
+        AuthNetworkServiceAssembly().assemble(container: container)
         AccountNetworkServiceAssembly().assemble(container: container)
         ProfileInfoNetworkServiceAssembly().assemble(container: container)
         AccountContentNetworkServiceAssembly().assemble(container: container)

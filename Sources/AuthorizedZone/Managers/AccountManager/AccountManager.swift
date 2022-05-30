@@ -30,6 +30,7 @@ public enum AccountManagerContext {
 final class AccountManager {
     private var account: AccountModelProtocol?
     private let accountID: String
+    private let authService: AuthNetworkServiceProtocol
     private let accountService: AccountNetworkServiceProtocol
     private let accountInfoService: AccountContentNetworkServiceProtocol
     private let profileService: ProfileInfoNetworkServiceProtocol
@@ -39,12 +40,14 @@ final class AccountManager {
     private var socket: SocketProtocol?
     
     init(accountID: String,
+         authService: AuthNetworkServiceProtocol,
          accountService: AccountNetworkServiceProtocol,
          accountInfoService: AccountContentNetworkServiceProtocol,
          quickAccessManager: QuickAccessManagerProtocol,
          profileService: ProfileInfoNetworkServiceProtocol,
          cacheService: AccountCacheServiceProtocol,
          container: Container) {
+        self.authService = authService
         self.accountService = accountService
         self.accountInfoService = accountInfoService
         self.quickAccessManager = quickAccessManager
@@ -127,6 +130,7 @@ extension AccountManager: AccountManagerProtocol {
     public func signOut() {
         setOffline()
         quickAccessManager.clearAll()
+        authService.signOut { _ in }
     }
 }
 

@@ -18,11 +18,13 @@ final class AccountManagerAssembly: Assembly {
             guard let accountService = r.resolve(AccountNetworkServiceProtocol.self),
                   let quickAccessManager = r.resolve(QuickAccessManagerProtocol.self),
                   let profileService = r.resolve(ProfileInfoNetworkServiceProtocol.self),
+                  let authService = r.resolve(AuthNetworkServiceProtocol.self),
                   let accountInfoService = r.resolve(AccountContentNetworkServiceProtocol.self),
                   let cacheService = r.resolve(AccountCacheServiceProtocol.self),
                   let accountID = quickAccessManager.userID else { fatalError(ErrorMessage.dependency.localizedDescription)
             }
             return AccountManager(accountID: accountID,
+                                  authService: authService,
                                   accountService: accountService,
                                   accountInfoService: accountInfoService,
                                   quickAccessManager: quickAccessManager,
